@@ -1,0 +1,61 @@
+<div class="background">
+  <div class="heading-tools myHead align">
+    <h1 class="title-style">
+      Categories
+    </h1>
+    <br>
+    <div class="align">
+      <button class="btn my-btn ">
+        Home
+      </button>
+      <button class="btn my-btn ">
+        Users & Technicians
+      </button>
+      <button [routerLink]="['/technicianassigments']" class="btn my-btn ">
+        Technician Assignments
+      </button>
+      <br>
+      <br>
+      <button type="button" class="btn my-btn" (click)="openModal(categoryCreate, null)">
+        Add New
+      </button>
+    </div>
+  </div>
+  <table matSort (matSortChange)="sortData($event)" class="myTable table table-dark">
+    <thead class="table-header ">
+      <tr>
+        <th mat-sort-header="categoryType" scope="col">Category Type</th>
+        <th scope="col">Info</th>
+        <th scope="col">Edit</th>
+        <th mat-sort-header="active" scope="col">Active</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of categories">
+        <td>{{category.category_type}} </td>
+        <td> <button type="button" class="action-btn btn "
+            (click)="openModal(categoryDetail, category, technician)">info</button> </td>
+        <td> <button type="button" class="action-btn btn "
+            (click)="openModal(categoryEdit, category, technician); saveCurrentId()">Edit</button>
+        </td>
+        <td>
+          <mat-slide-toggle [checked]="category.active" (change)="onActiveSlide($event, category)"> </mat-slide-toggle>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #categoryDetail let-c="close" let-d="dismiss">
+  <app-categories-detail [technician]="currentTechnician" [category]="currentCategory"> </app-categories-detail>
+</ng-template>
+
+<ng-template #categoryEdit let-c="close" let-d="dismiss">
+  <app-categories-edit (formValue)="editCategory($event)" [technician]="currentTechnician" [category]="currentCategory">
+  </app-categories-edit>
+</ng-template>
+
+<ng-template #categoryCreate let-c="close" let-d="dismiss">
+  <app-categories-edit (formValue)="createCategory($event)" [technician]="currentTechnician"
+    [category]="currentCategory"> </app-categories-edit>
+</ng-template>

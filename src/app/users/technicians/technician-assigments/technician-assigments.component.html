@@ -1,0 +1,73 @@
+<div class="background">
+  <div class="my-center">
+      <div class="heading-tools  align">
+          <h1 class="title-style">
+              Technician Assignments
+          </h1>
+        <br>
+        <div class="align">
+              <button class="btn my-btn ">
+                Home
+                </button>
+                <button class="btn my-btn ">
+                Users & Technicians
+                  </button>
+                  <button [routerLink]="['/categories']" class="btn my-btn ">
+                  Categories
+                  </button>
+        </div>
+      </div>
+      <div class= "tools align">
+        <h1>
+          Please Choose a Technician
+        </h1>
+      <div class="container">
+          <mat-form-field  color="primary">
+              <mat-label >{{this.value}}</mat-label>
+              <mat-select  (selectionChange)="selectedTech($event)">
+                <mat-option *ngFor="let tech of technicians" [value]="tech.user_id_pk">
+                  {{tech.firstname}} {{tech.lastname}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+      </div>
+      <div *ngIf="id !=null" class="container">
+          <mat-form-field  color="primary">
+              <mat-label>{{this.value}}</mat-label>
+              <mat-select (selectionChange)="selectedCat($event)">
+                <mat-option *ngFor="let cat of categories" [value]="cat.category_id_pk">
+                  {{cat.category_type}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <br>
+            <button class="btn my-btn" (click) ="createAssigned()">
+                Assign new
+            </button>
+      </div>
+      </div>
+  </div>
+    <div class=" myTable">
+        <div *ngIf="id !=null">   
+          <table  matSort (matSortChange)="sortData($event)"  mat-table [dataSource]="allAssigned" class="mat-elevation-z8">
+            <ng-container  matColumnDef="id_category_pk_fk">
+              <th  mat-header-cell *matHeaderCellDef> Categories ID</th>
+              <td mat-cell *matCellDef="let element"> {{element.id_category_pk_fk}} </td>
+            </ng-container>  
+            <ng-container matColumnDef="category_type">
+              <th mat-header-cell *matHeaderCellDef> Categories Assigned</th>
+              <td mat-cell *matCellDef="let element"> {{element.category_type}} </td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> Actions</th>
+              <td mat-cell *matCellDef="let element"> 
+                <button (click)="removeCategoryAssigned(element.id_user_pk_fk, element.id_category_pk_fk)" class=" btn remove-btn">
+                  remove
+                </button></td>
+            </ng-container>   
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>    
+        </div>    
+      </div>
+</div>

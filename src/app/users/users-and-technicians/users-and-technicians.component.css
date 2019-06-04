@@ -1,0 +1,133 @@
+h1 {
+    font-size: 4rem;
+}
+
+.tool-content{
+   margin-top: 3rem;
+   padding-top: 3rem;
+   font-family: helvetica;
+   height: 30rem;
+   background-color: #D3D6E1;
+   color: #091D3C;
+   display: flex;
+   flex-direction: column;
+   min-height: 100vh;
+}
+
+.my-btn {
+    margin-right: 1rem;
+    font-size: 2rem;
+    border-radius: 12px;
+    border: 2px solid #091D3C;
+    background-color: transparent;
+    color: #091D3C;
+ }
+ 
+ .my-btn:hover {
+    font-size: 2rem;
+    border-radius: 12px;
+    border: 2px solid  #091D3C;
+    background-color: #475283;
+    color:  #D3D6E1;
+ }
+
+ .my-btn-sub {
+    font-size: 3rem;
+    border-radius: 12px;
+    border: 2px solid #091D3C;
+    background-color: transparent;
+    color: #091D3C;
+ }
+
+ .my-btn-sub:hover {
+   font-size: 3rem;
+   border-radius: 12px;
+   border: 2px solid  #091D3C;
+   background-color: #475283;
+   color:  #D3D6E1;
+}
+
+.edit-btn {
+   margin-right: 1rem;
+   font-size: 1rem;
+   border-radius: 12px;
+   border: 2px solid #091D3C;
+   background-color: transparent;
+   color: #091D3C;
+}
+
+.edit-btn:hover {
+   margin-right: 1rem;
+   font-size: 1rem;
+   border-radius: 12px;
+   border: 2px solid  #091D3C;
+   background-color: #475283;
+   color:  #D3D6E1;
+}
+
+ .myTable {
+    border-radius: 4rem;
+    margin-top: 3rem;
+ }
+ 
+ 
+ th {
+    font-size: 1.5rem;
+ }
+ 
+ td {
+    font-size: 1.2rem;
+ }
+ 
+ th {
+    background-color: #091D3C; 
+    color:  #D3D6E1;
+ }
+ 
+ tr{
+    background-color:  #D3D6E1; 
+    color:  #091D3C;
+ }
+ 
+ table {
+    width: 100%;
+  }
+
+  ::ng-deep.mat-radio-button {
+   font-size: 2rem;
+  } 
+
+  .mat-grid-tile {
+      background: #D3D6E1;
+  }
+
+::ng-deep.mat-tab-group {
+   font-family: Helvetica;
+   font-size: 3rem;
+   color: #091D3C; 
+}
+
+::ng-deep.mat-tab-label {
+   font-family: Helvetica;
+   font-size: 2rem;
+   color: #091D3C; 
+}
+
+.form {
+   min-width: 150px;
+   max-width: 500px;
+   width: 100%;
+ }
+ 
+ .form-element {
+   padding: 5px 0px 25px 2px;
+   width: 50%;
+ }
+
+ .form-padding {
+    padding-left: 3rem
+ }
+
+ .pos {
+    text-align: center;
+ }

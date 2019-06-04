@@ -1,0 +1,38 @@
+<div class="larger">
+    <div class="modal-header">
+        <h3 class="modal-title" *ngIf="category!=null">{{category.category_type}}</h3>
+        <h3 class="modal-title" *ngIf="category===null">New Category</h3>
+    </div>
+    <form [formGroup]="categoriesEditForm" (ngSubmit)="onSubmit(categoriesEditForm.value)">
+        <div class="modal-body">
+            <div class="form-group">
+                <label>Category Type</label>
+                <input placeholder="Please enter the category type" type="text" formControlName="categoryType" class="form-control larger"
+                    [ngClass]="{ 'is-invalid': submitted && f.categoryType.errors }" />
+                <div *ngIf="submitted && f.categoryType.errors" class="invalid-feedback">
+                    <div *ngIf="f.categoryType.errors.required">Category type is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Category Description</label>
+                <textarea  placeholder="Please enter the category description" type="text" formControlName="categoryDescription" class="form-control larger"
+                    [ngClass]="{ 'is-invalid': submitted && f.categoryDescription.errors }"></textarea>
+                <div *ngIf="submitted && f.categoryDescription.errors" class="invalid-feedback">
+                    <div *ngIf="f.categoryDescription.errors.required">Category Description is required</div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="form-group">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-form">Save</button>
+                    </div>
+                    <div class="form-group">
+                        <button  class="btn btn-form" (click)="onCancelClick()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

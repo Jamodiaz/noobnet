@@ -1,0 +1,50 @@
+h1 {
+    font-size: 6rem;
+}
+
+.myHead {
+    height: 25rem;
+}
+
+.my-btn {
+    margin-right: 1rem;
+    font-size: 2rem;
+    border-radius: 12px;
+    border: 2px solid #091D3C;
+    background-color: transparent;
+    color: #091D3C;
+}
+
+.my-btn:hover {
+    font-size: 2rem;
+    border-radius: 12px;
+    border: 2px solid  #091D3C;
+    background-color: #475283;
+    color:  #D3D6E1;
+}
+
+.action-btn {
+    margin-right: 1rem;
+    font-size: 1rem;
+    border-radius: 12px;
+    border: 2px solid #091D3C;
+    background-color: transparent;
+    color: #091D3C;
+}
+
+.action-btn:hover {
+    margin-right: 1rem;
+    font-size: 1rem;
+    border-radius: 12px;
+    border: 2px solid #091D3C;
+    background-color: #475283;
+    color: #D3D6E1;
+}
+
+::ng-deep.mat-sort-header-arrow {
+    color: #D3D6E1;
+}
+
+::ng-deep.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+    background-color:#091D3C;
+}

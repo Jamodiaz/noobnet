@@ -1,0 +1,29 @@
+<!-- <div class="jumbotron jumbotron-fluid align-center">
+  <h1 class="padding-banner">{{Title}}</h1>
+  <button type="button" class="btn btn-add btn-lg" (click)="openModal(categoryCreate, null)">
+    {{ButtonAction}}
+  </button>
+</div> -->
+<div>
+  <table class="table table-dark">
+    <thead class="table-header ">
+      <tr>
+        <th *ngFor="let header of TableHeaders" scope="col">{{header}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of TableData">
+        <td>{{data.category_type}}</td>
+        <td> <button type="button"  class="btn btn-edit btn-lg material-icons"
+            >{{Icon}}</button> </td>
+        <!-- <td> <button type="button" class="btn btn-edit btn-lg material-icons "
+            (click)="openModal(categoryEdit, category, technician); saveCurrentId()">border_color</button>
+        </td>
+        <td>
+          <mat-slide-toggle [checked]="data.active" (change)="onActiveSlide($event, category)"> </mat-slide-toggle>
+        </td> -->
+      </tr>
+    </tbody>
+  </table>
+</div>
+
