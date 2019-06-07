@@ -1,6 +1,6 @@
-export interface Iroles {
-    role_id_pk?: number,
-    role_type?: string,
+export interface Istatus {
+    status_id_pk?: number,
+    status?: string,
     created_by?: number,
     created_date?: Date,
     modified_by?: number,

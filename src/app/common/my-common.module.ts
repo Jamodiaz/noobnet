@@ -6,7 +6,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { MatInputModule, MatTableModule, MatPaginatorModule, MatSortModule, MatProgressSpinnerModule, MatSlideToggleModule, MatGridListModule, MatSelectModule, MatRadioModule, MatStepperModule, MatFormFieldModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaintenanceModule } from './maintenance/maintenance/maintenance.module';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
@@ -32,7 +31,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatSlideToggleModule,
     BrowserAnimationsModule,
     SweetAlert2Module,
-    MaintenanceModule,
     MatTabsModule,
     MatGridListModule,
     MatSelectModule,

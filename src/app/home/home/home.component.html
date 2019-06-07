@@ -1,0 +1,59 @@
+<div class="background">
+  <div class="heading-tools ">
+    <h1 class="title-style">Home</h1>
+  </div>
+  <div class="menu-tool ">
+    <h1>
+      Welcome to IT-Ticket-Center
+    </h1>
+    <br>
+    <h2>
+      This module offers a variety of screens to manage the data of the application
+    </h2>
+    <br>
+    <h3>
+      NAVIGATE TO:
+    </h3>
+    <div class="container">
+      <div class="row">
+        <div class="card-group card-style">
+          <div class="card mb customCard" [routerLink]="['/categories']">
+            <div class="card-header" style="text-align: center">
+              <i class="material-icons" style="font-size: 400%;">assignment</i>
+              <div class="card-body">
+                <h5 class="card-title">Ticket Categories</h5>
+                <p class="card-text">
+                  View, create and update your ticket categories
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="card mb customCard" [routerLink]="['/usersandtechnicians']">
+            <div class="card-header" style="text-align: center">
+              <i class="material-icons" style="font-size: 400%;">assignment_ind</i>
+              <div class="card-body">
+                <h5 class="card-title">Users and Technicians</h5>
+                <p class="card-text">
+                  Create and edit users and roles
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="card mb customCard" [routerLink]="['/technicianassigments']">
+            <div class="card-header" style="text-align: center">
+              <i class="material-icons" style="font-size: 250%;">assignment_ind</i>
+              <i class="material-icons" style="font-size: 400%;">edit</i>
+              <div class="card-body">
+                <h5 class="card-title">Technician Assignments</h5>
+                <p class="card-text">
+                  Assign or remove categories
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

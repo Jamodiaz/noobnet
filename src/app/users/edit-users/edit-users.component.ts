@@ -3,6 +3,8 @@ import { ModalService } from 'src/app/services/modal.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Iusers } from '../users-and-technicians/users';
 import { Iroles } from '../roles';
+import { MatSelectChange } from '@angular/material';
+import { readPatchedData } from '@angular/core/src/render3/util';
 
 @Component({
   selector: 'app-edit-users',
@@ -14,13 +16,14 @@ export class EditUsersComponent implements OnInit {
   isDirty: boolean = true;
   submitted = false;
 
+  idRole: number;
+
   @Input() user: any;
   @Input() roles: Iroles;
 
   @Output() formValue = new EventEmitter();
 
   usersEditForm: FormGroup;
-
 
   constructor(private modalService: ModalService,
     private usersFormBuilder: FormBuilder) { }
@@ -40,7 +43,8 @@ export class EditUsersComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.required],
       createdBy: ['', Validators.required],
-      createdDate: ['', Validators.required]
+      createdDate: ['', Validators.required],
+      role: ['', Validators.required]
     });
     return Promise.resolve()
   }
@@ -52,7 +56,15 @@ export class EditUsersComponent implements OnInit {
       this.usersEditForm.controls['lastName'].setValue(this.user.lastname);
       this.usersEditForm.controls['email'].setValue(this.user.email);
       this.usersEditForm.controls['phone'].setValue(this.user.phone);
+      this.usersEditForm.controls['role'].setValue(this.user.role_type_fk);
     }
+  }
+
+
+  selectedRole(change: MatSelectChange): Promise<number> {
+    this.user.role_type_fk = change.value;
+
+    return Promise.resolve(this.idRole);
   }
 
   // Handles cancel button in the form and popup for when the user hasn't save the form
@@ -67,15 +79,15 @@ export class EditUsersComponent implements OnInit {
 
 
   onSubmit(form: any) {
+    
+
     this.submitted = true;
 
-    // stop here if form is invalid
-    if (this.usersEditForm.invalid) {
-      return;
-    }
+ 
 
     this.formValue.emit(form);
 
   }
 
+  
 }
