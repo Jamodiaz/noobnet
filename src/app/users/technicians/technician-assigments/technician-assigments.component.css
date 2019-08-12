@@ -21,11 +21,54 @@
     height: 18rem;
 }
 
+
+.assignment-title {
+    border-radius: 0px 10px 40px 0px;
+    text-align: left; 
+    width: 30%;
+    height: 5rem;
+    background-color: #091D3C;
+}
+
+.assignment-menu {
+    border-radius: 15px 50px 30px 5px; 
+    border-color: #091D3C;
+    border-style: solid;
+    border-width: 5px;
+    width: 100%;
+    height: 9rem;
+    background-color: #D3D6E1;
+}
+
 .title-style {
     padding-top: 4rem;
     font-family: helvetica;
     text-align: center;
     padding-right: 3rem;
+}
+
+.content-var {
+    border-color: #091D3C;
+    border-style: solid;
+    border-width: 5px;
+    width: 50%;
+    height: 12rem;
+    background-color: #D3D6E1;
+}
+
+.info-var {
+    margin-left: 1rem;
+    color: #091D3C;
+    background-color: #D3D6E1;
+    border-color: #091D3C;
+    border-style: solid;
+    border-width: 5px;
+    width: 13%;
+    height: 12rem;
+}
+
+.larger {
+    font-size: 130%;
 }
 
 .my-btn {
@@ -44,6 +87,24 @@
     background-color: #475283;
     color:  #D3D6E1;
 }
+
+.add-btn {
+    margin-right: 1rem;
+    font-size: 2rem;
+    border-radius: 12px;
+    border: 2px solid #D3D6E1;
+    background-color: transparent;
+    color: #D3D6E1;
+}
+
+.add-btn:hover {
+    font-size: 2rem;
+    border-radius: 12px;
+    border: 2px solid  #091D3C;
+    background-color: #091D3C;
+    color:  #D3D6E1;
+}
+
 
 .remove-btn {
     margin-right: 1rem;
@@ -75,8 +136,7 @@
 }
 
 mat-form-field {
-    font-size: 1.5rem;
-    width: 30%;
+   color: #D3D6E1;
   }
 
 ::ng-deep.mat-select-value-text {
@@ -87,6 +147,64 @@ mat-form-field {
 ::ng-deep.mat-form-field-underline {
     background-color: #091D3C !important;
   } 
+
+  ::ng-deep .mat-focused .mat-form-field-label {
+    color: #D3D6E1 !important;
+ }
+
+ ::ng-deep.mat-form-field-underline {
+    color: #D3D6E1 !important;
+} 
+
+::ng-deep.mat-form-field-ripple {
+    color: #D3D6E1 !important;
+}
+
+::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline {
+    color: #D3D6E1 !important;
+  }
+  
+  .matselect-placeholder::mat-select-placeholder { 
+    color: white;
+    opacity: 1; 
+   }
+
+::ng-deep .mat-input-element {
+    color: #D3D6E1 !important;
+}
+ 
+  ::ng-deep .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+    color: #D3D6E1 !important;
+  }
+
+::ng-deep.input.mat-input-element {
+    color: #D3D6E1 !important;
+  }
+
+::ng-deep.mat-form-field-empty.mat-form-field-label {
+    color: #D3D6E1 !important;
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+    color: #D3D6E1 !important;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: #D3D6E1 !important;
+}
+
+::ng-deep.mat-form-field-underline {
+    color: #D3D6E1 !important;
+}
+
+::ng-deep.mat-form-field.mat-focused {
+    color: #D3D6E1 !important;
+}
+
+::ng-deep.mat-list-item.active {
+    color: #D3D6E1 !important;
+}
+
 
 
 h1 {

@@ -8,6 +8,8 @@ import { Icategories } from 'src/app/categories/interfaces/categories';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatSelectChange, Sort } from '@angular/material';
 import { Router } from '@angular/router';
+import { MyHomeService } from 'src/app/home/home/my-home.service';
+import { CategoriesService } from 'src/app/categories/categories.service';
 
 @Component({
   selector: 'app-technician-assigments',
@@ -22,6 +24,22 @@ export class TechnicianAssigmentsComponent implements OnInit {
   technicians: Itechnicians[];
   categories: Icategories[];
 
+  assigned: ITechniciansAssigned;
+  assignedCount: number;
+
+  pSize: number = 6;
+  pageNum: number = 1;
+
+  catCount: number;
+  activeCatCount: number;
+  inactiveCatCount: number;
+
+  techCount: number;
+  clientCount: number;
+  roleCount: number;
+
+  Count: number;
+
   // Technician and Category ID
   id: number;
   cId: number;
@@ -33,11 +51,26 @@ export class TechnicianAssigmentsComponent implements OnInit {
     private techAssignedService: TechnicianAssigmentsService,
     private usersService: UsersService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private homeService: MyHomeService,
+    private categoriesService: CategoriesService
     ) { }
 
   ngOnInit() {
+    this.getTechCount();
+    this.getCategoriesCount();
+    this.getActiveCatCount();
+    this.getInactiveCatCount();
     this.getTechnicians();
+    this.promiseForTbl(this.pageNum);
+  }
+
+  async promiseForTbl(event : any) {
+    this.pageNum = +event;
+    let asgned: any = await this.techAssignedService.getTechAssignments(this.pageNum, this.pSize, this.id);
+    this.assigned = asgned['Data']
+    let cnt: any = await this.techAssignedService.getTechAssignmentsCount(this.id);
+    this.assignedCount = cnt['Data']
   }
 
   /* 
@@ -46,9 +79,34 @@ export class TechnicianAssigmentsComponent implements OnInit {
   */
   selectedTech(change: MatSelectChange): Promise<number>{
     this.id = change.value;
+    this.promiseForTbl(this.pageNum);
     this.getTechnicianAssignments();
     this.getNotAssignedCategories();
     return Promise.resolve(this.id)
+  }
+
+  getTechCount() {
+    this.homeService.getTechniciansCount().subscribe(res => {
+      this.techCount = res['Data'];
+    });
+  }
+
+  getCategoriesCount() {
+    this.homeService.getCategoriesCount().subscribe(res => {
+      this.catCount = res['Data'];
+    });
+  }
+
+  getActiveCatCount() {
+    this.categoriesService.categoryActiveCount().subscribe((count: any) => {
+      this.activeCatCount = count['Data'][0];
+    });
+  }
+
+  getInactiveCatCount() {
+    this.categoriesService.categoryInactiveCount().subscribe((count: any) => {
+      this.inactiveCatCount = count['Data'][0];
+    });
   }
 
   // This method saves the selected category id
@@ -68,7 +126,6 @@ export class TechnicianAssigmentsComponent implements OnInit {
     this.techAssignedService.getTechnicianAssignedCategories(this.id).subscribe((technicianAssigned: ITechniciansAssigned) => {
       this.allAssigned = technicianAssigned['Data'];
       console.log(technicianAssigned['Data'])
-      console.log(this.allAssigned)
     })
   }
 
@@ -92,7 +149,7 @@ export class TechnicianAssigmentsComponent implements OnInit {
     let newAssigned: ITechniciansAssigned = {
       id_user_pk_fk: this.id,
       id_category_pk_fk: this.cId,
-      created_by: this.authService.userTechnician.user_id_pk
+      created_by: this.authService.authenticated.User_id_pk
     }
     if(window.confirm("Do you really want to assign this category?")) {
       this.techAssignedService.createTechnicianAssigned(newAssigned).subscribe(res =>{

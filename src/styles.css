@@ -21,6 +21,14 @@ body, html {
     text-align: center;
 }
 
+.align-mycenter {
+   text-align: center;
+   align-self: center;
+   align-content: center;
+   align-items:  center;
+   position: center;
+}
+
 .background {
     background-color: #475283;
     padding-top: 3rem;

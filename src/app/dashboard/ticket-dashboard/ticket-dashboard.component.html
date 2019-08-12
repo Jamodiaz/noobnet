@@ -1,0 +1,255 @@
+<div class="background">
+  <!-- --------------------------->
+  <div class="dashboard-menu">
+    <div class="dashboard-title">
+      <h1 style=" padding-top: .5rem; text-align: center; font-family: helvetica; font-size: 3rem; color:  #D3D6E1"> Dashboard </h1>
+    </div>
+  </div>
+  <br>
+  <!-- --------------------------->
+  <div class="container-fluid">
+    <div class="container-fluid align-mycenter">
+      <div class="row">
+        <div class="myLittleCard">
+          <div style="text-align: center">
+            <br>
+            <h5 class="card-title">Most Closed Tickets</h5>
+            <p *ngIf="technicianMaxClosed !=null" class="card-text">
+              {{technicianMaxClosed.firstname}} {{technicianMaxClosed.lastname}}
+            </p>
+            <h2>
+              {{technicianMaxClosedCount}}
+            </h2>
+          </div>
+        </div>
+        <div class="myLittleCard">
+          <div style="text-align: center">
+            <br>
+            <h5 class="card-title">Most Opened Tickets</h5>
+            <p *ngIf="technicianMaxOpened !=null" class="card-text">
+              {{technicianMaxOpened.firstname}} {{technicianMaxOpened.lastname}}
+            </p>
+            <h2>
+              {{technicianMaxOpenedCount}}
+            </h2>
+          </div>
+        </div>
+        <div class="myLittleCard">
+          <div style="text-align: center">
+            <br>
+            <h5 class="card-title">Category Most Applied For</h5>
+            <p *ngIf="categoryMostTickets !=null" class="card-text">
+              {{categoryMostTickets.category_type}}
+            </p>
+            <h2>
+              {{categoriesMostTicketCount}}
+            </h2>
+          </div>
+        </div>
+        <div class="myLittleCard">
+          <div style="text-align: center">
+            <br>
+            <h5 class="card-title">Opened Tickets</h5>
+            <br>
+            <p class="card-text">
+              Count:
+            </p>
+            <br>
+            <h2>
+              {{openedTicketsCount}}
+            </h2>
+          </div>
+        </div>
+        <div class="myLittleCard">
+          <div style="text-align: center">
+            <br>
+            <h5 class="card-title">Closed Tickets</h5>
+            <br>
+            <p class="card-text">
+              Count:
+            </p>
+            <br>
+            <h2>
+              {{closedTicketsCount}}
+            </h2>
+          </div>
+        </div>
+        <div class=" myLittleCard">
+          <div style="text-align: center">
+            <br>
+            <h5 class="card-title">Categories</h5>
+            <br>
+            <div class="container-fluid">
+              <div class="container">
+                <div class="row " style="text-align: center">
+                  <p class="card-text" style="padding-left: 2.5rem">
+                    Active:
+                  </p>
+                  <p class="card-text" style="padding-left: 2rem">
+                    Inactive
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="container-fluid">
+              <div class="container">
+                <div class="row" style="text-align: center">
+                  <br>
+                  <h2 class="card-text" style="padding-left: 3.5rem">
+                    {{activeCatCount}}
+                  </h2>
+                  <h2 class="card-text" style="padding-left: 7rem">
+                    {{inactiveCount}}
+                  </h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="container-fluid my-chart-container rounded">
+    <br>
+      <h1 class="header-dates"> Monthly Administrative Recap Report</h1>
+    <div class="row">
+        <div class="row container-fluid">
+          <div class="container-fluid">
+            <mat-form-field appearance="outline">
+              <mat-label>Select Year</mat-label>
+              <mat-select (selectionChange)="getCurrentYearSelected($event)" disableRipple>
+                <mat-option *ngFor="let y of createdYears" value="{{y}}">{{y}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="container">
+            <google-chart class="chart-align" *ngIf="myArrayMonthControler != null" #chart [title]="title" [type]="type"
+              [data]="data" [columnNames]="columnNames" [options]="options" [width]="width" [height]="height">
+            </google-chart>
+          </div>
+          <br>
+          <div class=" .d-flex my-c-report align-mycenter">
+            <h1 class="align-mycenter" style="font-size: 3rem; font-weight: bolder; padding-top: 1rem;">Administrative Counts</h1>
+            <div class="row">
+                <h1 class="count-text"> Categories List Count</h1>
+                <h1 class="count-text material-icons" > assignment </h1>
+                <h1 class="count-num"> {{catCount}} </h1>
+            </div>
+            <div class="row">
+                <h1 class="count-text">Tickets List Count</h1>
+                <h1 class="count-text material-icons"> assignment </h1>
+                <h1 class="count-num">  {{ticketCount}} </h1>
+            </div>
+            <div class="row">
+                <h1 class="count-text">Roles List Count</h1>
+                <h1 class="count-text material-icons"> edit </h1>
+                <h1 class="count-num">   {{roleCount}} </h1>
+            </div>
+            <div class="row">
+                <h1 class="count-text">Technicians List Count</h1>
+                <h1 class="count-text material-icons"> assignment_ind</h1>
+                <h1 class="count-num">   {{techCount}} </h1>
+            </div>
+            <div class="row">
+                <h1 class="count-text">Clients List Count</h1>
+                <h1 class="count-text material-icons"> assignment_ind</h1>
+                <h1 class="count-num">  {{clientCount}} </h1>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+<br>
+<!-- --------------------------->
+<br>
+<div class="ticket-menu">
+  <div class="row container-fluid">
+      <div class="dashboard-title">
+          <h1 style=" padding-top: .5rem; text-align: center; font-family: helvetica; font-size: 3rem; color:  #D3D6E1"> Tickets </h1>
+        </div>
+        <div class=" row container align-mycenter">
+            <mat-radio-group (change)="onChange($event)"  aria-label="Select an option">
+                <mat-radio-button style="font-size: 3rem;" class="radio-style" value="All">  All </mat-radio-button>
+                <mat-radio-button style="font-size: 3rem; " class="radio-style" value="Tech"> Technician </mat-radio-button>
+                <mat-radio-button style="font-size: 3rem;" class="radio-style" value="Cat">  Categories </mat-radio-button>
+                <mat-radio-button style="font-size: 3rem;" class="radio-style" value="Stat">  Status </mat-radio-button>
+              </mat-radio-group>
+        </div>
+  </div>
+</div>
+<br>
+<br>
+<div class="row">
+  <div class="container-fluid">
+      <form [formGroup]="keywordForm">
+          <mat-form-field appearance="outline">
+              <mat-label>Search Ticket</mat-label>
+              <input matInput placeholder="Enter Data" formControlName="keyword" (input)="onSearchChange($event.target.value)">
+              <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+      </form>
+  </div>
+<div  *ngIf="tableControl==='Tech' && tableControl!='All'" class="container-fluid">
+    <mat-form-field appearance="outline">
+      <mat-label>Select Technician</mat-label>
+      <mat-select  [(value)]="defaultTech" (selectionChange)="selectedTech($event)" disableRipple>
+        <mat-option *ngFor="let y of technicians" value="{{y.user_id_pk}}">{{y.firstname}} {{y.lastname}}</mat-option>
+      </mat-select> 
+    </mat-form-field>
+  </div>
+  <div *ngIf="tableControl==='Cat'&& tableControl!='All'" class="container-fluid">
+      <mat-form-field appearance="outline">
+        <mat-label>Select Category</mat-label>
+        <mat-select  [(value)]="defaultCat" (selectionChange)="selectedCat($event)" disableRipple>
+          <mat-option *ngFor="let y of categories" value="{{y.category_id_pk}}">{{y.category_type}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div *ngIf="tableControl==='Stat' && tableControl!='All'" class="container-fluid">
+        <mat-form-field appearance="outline">
+          <mat-label>Select Status</mat-label>
+          <mat-select  [(value)]="defaultStat" (selectionChange)="selectedStat($event)"disableRipple>
+            <mat-option *ngFor="let y of status" value="{{y.status_id_pk}}">{{y.status}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+</div>
+  <br>
+<table matSort (matSortChange)="sortData($event)" *ngIf="allTickets != null" mat-table [dataSource]="allTickets" class="mat-elevation-z8">
+    <ng-container matColumnDef="ticket_number_pk">
+        <th mat-header-cell *matHeaderCellDef>Ticket ID</th>
+        <td mat-cell *matCellDef="let element"> {{element.ticket_number_pk}} </td>
+      </ng-container>
+      <ng-container   matColumnDef="name">
+        <th mat-sort-header="name" mat-header-cell *matHeaderCellDef> Name </th>
+        <td  mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="firstname" >
+          <th mat-header-cell *matHeaderCellDef> Tech First </th>
+          <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+      </ng-container>
+      <ng-container matColumnDef="lastname" >
+          <th mat-header-cell *matHeaderCellDef> Tech Last </th>
+          <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+      </ng-container>
+      <ng-container matColumnDef="category_type" >
+          <th mat-header-cell *matHeaderCellDef> Category </th>
+          <td mat-cell *matCellDef="let element"> {{element.category_type}} </td>
+      </ng-container>
+      <ng-container matColumnDef="status" >
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+      </ng-container>
+      <ng-container matColumnDef="created_date">
+        <th mat-sort-header="createdDate" mat-header-cell *matHeaderCellDef> Created Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.created_date}}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="ticketsCols"></tr>
+      <tr mat-row *matRowDef="let row; columns: ticketsCols;"></tr>
+</table>
+<br>
+<br>
+    <table-pagination *ngIf="universalCount != null" (page)="promiseTable($event)"  [itemsTotal]="universalCount" [pageSize]="pSize"> </table-pagination>
+</div>
+

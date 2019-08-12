@@ -1,79 +1,57 @@
 <div class="background">
-  <div class="my-center">
-    <div class="heading-tools align">
-      <h1 class="title-style">Ticket Creation</h1>
-    </div>
-  </div>
-  <div class="tool-content">
-    <mat-tab-group animationDuration="500ms">
-      <mat-tab label="Create Tickets">
-        <br>
-        <div class="container-fluid">
-          <h1>Enter the following data:</h1>
-          <form [formGroup]="ticketForm">
-            <div class="modal-body">
-              <div class="row">
-                <mat-form-field class="form-element">
-                  <input matInput placeholder="Name" formControlName="name">
-                </mat-form-field>
-
-                <mat-form-field color="primary">
-                  <mat-label>Select Category</mat-label>
-                  <mat-select formControlName="category" matInput (selectionChange)="selectedCat($event)">
-                    <mat-option *ngFor="let cat of activeCategories" [value]="cat.category_id_pk">
-                      {{cat.category_type}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div class="row">
-                <mat-form-field class="form-element">
-                  <textarea matInput placeholder="Description" formControlName="description"></textarea>
-                </mat-form-field>
-
-              </div>
-
-              <!-- <mat-form-field class="form-element">
-                  <input matInput placeholder="Phone" formControlName="phone">
-                </mat-form-field>
-                <br>
-                <mat-form-field color="primary">
-                  <mat-label>{{this.value}}</mat-label>
-                  <mat-select formControlName="role" matInput placeholder="Select role" (selectionChange)="selectedRole($event)">
-                    <mat-option *ngFor="let role of roles" [value]="role.role_id_pk">
-                      {{role.role_type}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field> -->
-            </div>
-            <div class="modal-footer">
-              <div class="form-group">
-                <div class="btn-group" role="group" aria-label="Basic example">
-                  <div class="form-group">
-                    <button class="btn btn-form" (click)="onSubmit(usersEditForm.value)">Save</button>
-                  </div>
-                  <div class="form-group">
-                    <button class="btn btn-form" (click)="onCancelClick()">Cancel</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
-
-
-
+    <div class="create-menu">
+        <div class="create-title">
+          <h1 style=" padding-top: .5rem; text-align: center; font-family: helvetica; font-size: 3rem; color:  #D3D6E1"> Ticket Creation </h1>
         </div>
+      </div>
+<br>
+<div  *ngIf="created != true "class="info-create">
+  <h1 style="text-align: start; margin-left: 3rem; margin-top: 1rem; font-weight: bold; font-family: Helvetica; color:   #091D3C" > New Ticket </h1>
+  <br>
+  <br>
+  <form style="text-align: center;" [formGroup]="ticketForm">
+      <mat-form-field  class="form-element" appearance="outline" >
+          <input matInput placeholder="Name" formControlName="name">
+        </mat-form-field>
+        <br>
+        <br>
+        <mat-form-field appearance="outline" color="primary">
+            <mat-label>Select Category</mat-label>
+            <mat-select formControlName="category" matInput (selectionChange)="selectedCat($event)">
+              <mat-option *ngFor="let cat of activeCategories" [value]="cat.category_id_pk">
+                {{cat.category_type}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br>
+          <br>
+          <mat-form-field appearance="outline" class="form-element">
+              <textarea matInput placeholder="Description" formControlName="description"></textarea>
+            </mat-form-field>
+            <br>
+            <br>
+            <mat-form-field appearance="outline" class="example-full-width">
+                <input (dateChange)="dateChange($event)" matInput [matDatepicker]="picker"
+                  placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker touchUi #picker></mat-datepicker>
+              </mat-form-field>
+              <br>
+              <br>
+              <div class="btn-group" role="group" aria-label="Basic example">
+                  <button class="btn btn-form" (click)="createTicket(ticketForm.value)">
+                    Create New</button>
+              </div>
+  </form>
 
+</div>
 
-
-
-
-
-      </mat-tab>
-      <mat-tab label="Show Tickets"> Content 2 </mat-tab>
-    </mat-tab-group>
-
-  </div>
-
+<div *ngIf="created === true " class="info-create">
+<h1 style="margin-top: 15rem; text-align: center; font-size: 6rem; color: rgb(24, 148, 13) "> Ticket Created Succesfully! </h1>
+<br>
+<p  style=" text-align: center; font-size: 4rem; color: #091D3C ;">
+  Your Ticket will be assigned to one of our Technicians!
+</p>
+</div>
 
 </div>

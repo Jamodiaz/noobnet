@@ -1,0 +1,84 @@
+<div class="background">
+  <div class="login-menu">
+    <div class="login-title">
+      <h1 style=" padding-top: .5rem; text-align: center; font-family: helvetica; font-size: 3rem; color:  #D3D6E1"> Log
+        In </h1>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div *ngIf="str==='NotShow'" class="info-create">
+    <h1
+      style="text-align: start; margin-left: 3rem; margin-top: 1rem; font-weight: bold; font-family: Helvetica; color:   #091D3C">
+      Welcome </h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <form style="text-align: center;" [formGroup]="loginForm" (ngSubmit)="logIn(loginForm.value)">
+      <mat-form-field class="form-element" appearance="outline">
+        <input matInput placeholder="Email" formControlName="email">
+      </mat-form-field>
+      <br>
+      <br>
+      <mat-form-field class="form-element" appearance="outline">
+        <input type="password" matInput placeholder="Password" formControlName="password">
+      </mat-form-field>
+      <br>
+      <br>
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button class="btn btn-form" type="submit">
+          Log in</button>
+      </div>
+      <br>
+      <br>
+      <button class="btn" (click)="myStrCtr()" style="font-size: 2rem; font-family: Helveticq; font-weight: bolder">
+        Create New User ?</button>
+    </form>
+    <button (click)="logOut()"
+    style=" margin-left: 2rem; font-size: 2rem; font-family: Helvetica; font-weight: bolder"
+ > logOut </button>
+  </div>
+  <div *ngIf="str==='Show'" class="info-create">
+    <form style="text-align: center" [formGroup]="createUserForm">
+      <div class="row">
+        <button (click)="myStrCtr()"
+          style=" margin-left: 2rem; font-size: 2rem; font-family: Helvetica; font-weight: bolder"
+          class=" btn material-icons "> backspace </button>
+        <h1
+          style="text-align: start; margin-left: 3rem; margin-top: 1rem; font-weight: bold; font-family: Helvetica; color:   #091D3C">
+          New User</h1>
+      </div>
+      <br>
+      <mat-form-field class="form-element" appearance="outline">
+        <input matInput placeholder="First" formControlName="firstname">
+      </mat-form-field>
+      <br>
+      <br>
+      <mat-form-field class="form-element" appearance="outline">
+        <input matInput placeholder="Last" formControlName="lastname">
+      </mat-form-field>
+      <br>
+      <br>
+      <mat-form-field class="form-element" appearance="outline">
+        <input type="email" matInput placeholder="Email" formControlName="email">
+      </mat-form-field>
+      <br>
+      <br>
+      <mat-form-field class="form-element" appearance="outline">
+        <input type="password" matInput placeholder="Password" formControlName="password">
+      </mat-form-field>
+      <br>
+      <br>
+      <mat-form-field class="form-element" appearance="outline">
+        <input matInput placeholder="Phone Number" formControlName="phone">
+      </mat-form-field>
+      <br>
+      <br>
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button class="btn btn-form" (click)="createNewUser(createUserForm.value)">
+          Create New</button>
+      </div>
+    </form>
+  </div>
+</div>

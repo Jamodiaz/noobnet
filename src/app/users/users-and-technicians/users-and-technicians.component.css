@@ -2,6 +2,61 @@ h1 {
     font-size: 4rem;
 }
 
+
+.larger {
+   font-size: 130%;
+}
+
+
+
+.users-menu {
+   border-radius: 15px 50px 30px 5px; 
+   border-color: #091D3C;
+   border-style: solid;
+   border-width: 5px;
+   width: 100%;
+   height: 9rem;
+   background-color: #D3D6E1;
+}
+
+.users-title {
+   border-radius: 0px 10px 40px 0px;
+   text-align: left; 
+   width: 30%;
+   height: 5rem;
+   background-color: #091D3C;
+}
+
+.info-var {
+   margin-left: 1rem;
+   color: #091D3C;
+   background-color: #D3D6E1;
+   border-color: #091D3C;
+   border-style: solid;
+   border-width: 5px;
+   width: 13%;
+   height: 12rem;
+}
+
+.selection-var { 
+   color: #091D3C;
+   background-color: #D3D6E1;
+   border-color: #091D3C;
+   border-style: solid;
+   border-width: 5px;
+   width: 50%;
+   height: 10rem;
+}
+
+.content-var {
+   border-color: #091D3C;
+   border-style: solid;
+   border-width: 5px;
+   width: 50%;
+   height: 12rem;
+   background-color: #D3D6E1;
+}
+
 .tool-content{
    margin-top: 3rem;
    padding-top: 3rem;
@@ -32,18 +87,18 @@ h1 {
  }
 
  .my-btn-sub {
-    font-size: 3rem;
+    font-size: 2rem;
     border-radius: 12px;
-    border: 2px solid #091D3C;
+    border: 2px solid #D3D6E1;
     background-color: transparent;
-    color: #091D3C;
+    color: #D3D6E1;
  }
 
  .my-btn-sub:hover {
-   font-size: 3rem;
+   font-size: 2rem;
    border-radius: 12px;
    border: 2px solid  #091D3C;
-   background-color: #475283;
+   background-color: #091D3C;
    color:  #D3D6E1;
 }
 
@@ -59,7 +114,7 @@ h1 {
    font-size: 1.5rem;
    border-radius: 12px;
    border: 2px solid  #091D3C;
-   background-color: #475283;
+   background-color: #091D3C;
    color:  #D3D6E1;
 }
 
@@ -149,6 +204,92 @@ h1 {
  }
 
  .modal-header {
-   background-color:  #475283;
+   background-color:  #091D3C;
    color: #D3D6E1;
  }
+
+ .small-content {
+   width: 40%;
+   margin-left: 1rem;
+   color: #091D3C;
+   background-color: #D3D6E1;
+   border-color: #091D3C;
+   border-style: solid;
+   border-width: 5px;
+   height: 6rem;;
+}
+
+::ng-deep.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+   background-color:#091D3C;
+}
+
+ ::ng-deep .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+   opacity: 0.5 !important;     /*click effect color change*/
+   background-color: #091D3C !important;
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+   background-color: #475283 !important;   /*inner circle color change*/
+}
+
+::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: #091D3C!important; /*outer ring color change*/
+}
+
+
+::ng-deep .mat-focused .mat-form-field-label {
+   color: #D3D6E1 !important;
+}
+
+::ng-deep.mat-form-field-underline {
+   color: #D3D6E1 !important;
+} 
+
+::ng-deep.mat-form-field-ripple {
+   color: #D3D6E1 !important;
+}
+
+::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline {
+   color: #D3D6E1 !important;
+ }
+ 
+ .matselect-placeholder::mat-select-placeholder { 
+   color: white;
+   opacity: 1; 
+  }
+
+::ng-deep .mat-input-element {
+   color: #D3D6E1 !important;
+}
+
+ ::ng-deep .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+   color: #D3D6E1 !important;
+ }
+
+::ng-deep.input.mat-input-element {
+   color: #D3D6E1 !important;
+ }
+
+::ng-deep.mat-form-field-empty.mat-form-field-label {
+   color: #D3D6E1 !important;
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+   color: #D3D6E1 !important;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+   color: #D3D6E1 !important;
+}
+
+::ng-deep.mat-form-field-underline {
+   color: #D3D6E1 !important;
+}
+
+::ng-deep.mat-form-field.mat-focused {
+   color: #D3D6E1 !important;
+}
+
+::ng-deep.mat-list-item.active {
+   color: #D3D6E1 !important;
+}

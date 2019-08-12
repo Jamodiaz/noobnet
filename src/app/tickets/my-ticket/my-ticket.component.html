@@ -1,0 +1,100 @@
+<div class="background">
+  <div class="ticket-menu">
+    <div class="ticket-title">
+      <h1 style=" padding-top: .5rem; text-align: center; font-family: helvetica; font-size: 3rem; color:  #D3D6E1">
+        My Tickets </h1>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  <div class="content-var align-mycenter">
+    <div class="">
+      <h1 style=" padding-top: .5rem; padding-left: 1rem; text-align: left; font-family: helvetica; font-size: 3rem; color:#091D3C"> Navigate</h1>
+    </div>
+  <br>
+<div class="row  container-fluid">
+  <button style="margin-left: 15rem;" [routerLink]="['/home']" class="btn my-btn ">
+    Home
+  </button>
+  <button [routerLink]="['/ticketcreation']" class="btn my-btn ">
+    Create New
+  </button>
+  <button [routerLink]="['/ticketcreation']" class="btn my-btn ">
+    Ticket Creation
+  </button>
+</div>
+</div>
+
+<br>
+<br>
+
+<div class="container-fluid">
+  <form [formGroup]="keywordForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Search Ticket</mat-label>
+      <input matInput placeholder="Enter Data" formControlName="keyword"
+        (input)="onSearchChange($event.target.value)">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </form>
+</div>
+
+
+
+
+<div class="myTable">
+  <div>
+    <table *ngIf="allTickets != null" matSort (matSortChange)="sortData($event)" mat-table [dataSource]="allTickets" class="mat-elevation-z8">
+      <ng-container matColumnDef="ticket_number_pk">
+        <th mat-header-cell *matHeaderCellDef>Ticket ID</th>
+        <td mat-cell *matCellDef="let element"> {{element.ticket_number_pk}} </td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-sort-header="name" mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="firstname">
+        <th mat-header-cell *matHeaderCellDef> Tech First </th>
+        <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+      </ng-container>
+      <ng-container matColumnDef="lastname">
+        <th mat-header-cell *matHeaderCellDef> Tech Last </th>
+        <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+      </ng-container>
+      <ng-container matColumnDef="category_type">
+        <th mat-header-cell *matHeaderCellDef> Category </th>
+        <td mat-cell *matCellDef="let element"> {{element.category_type}} </td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+      </ng-container>
+      <ng-container matColumnDef="created_date">
+        <th mat-sort-header="createdDate" mat-header-cell *matHeaderCellDef> Created Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.created_date}}</td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-slide-toggle [checked]="element.active" (change)="onActiveSlide($event, element)">
+          </mat-slide-toggle>
+          <button style="margin-left: 1rem;"(click)="openModal(ticketEdit, element)" class=" btn edit-btn">
+            edit
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="ticketsCols"></tr>
+      <tr mat-row *matRowDef="let row; columns: ticketsCols;"></tr>
+    </table>
+  </div>
+</div>
+
+<br>
+<br>
+
+<table-pagination *ngIf="universalCount != null" (page)="promiseForTable($event)" [itemsTotal]="universalCount"
+    [pageSize]="pSize"> </table-pagination>
+
+</div>

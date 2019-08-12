@@ -1,0 +1,219 @@
+<div class="background">
+  <div class="ticket-menu">
+    <div class="ticket-title">
+      <h1 style=" padding-top: .5rem; text-align: center; font-family: helvetica; font-size: 3rem; color:  #D3D6E1">
+        Show Tickets </h1>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  <div class="row container-fluid">
+      <div class="content-var align-mycenter">
+          <div class="">
+            <h1 style=" padding-top: .5rem; padding-left: 1rem; text-align: left; font-family: helvetica; font-size: 3rem; color:#091D3C"> Navigate</h1>
+          </div>
+        <br>
+    <div class="row  container-fluid">
+        <button style="margin-left: 15rem;" [routerLink]="['/home']" class="btn my-btn ">
+          Home
+        </button>
+        <button [routerLink]="['/dashboard']" class="btn my-btn ">
+          Dashboard
+        </button>
+        <button [routerLink]="['/ticketcreation']" class="btn my-btn ">
+          Ticket Creation
+        </button>
+    </div>
+  </div>
+
+
+      <div style="margin-left: 10rem;" class="info-var">
+          <h1 style=" padding-top: .5rem; text-align: center; font-family: helvetica; font-size: 3rem; color:#091D3C"> Count </h1>
+          <h2 style=" padding-top: .5rem; text-align: center; font-family: helvetica; font-size: 3rem; color:#091D3C">
+            {{ticketCount}}
+          </h2>
+        </div>
+<div class="info-var">
+  <h1 style=" padding-top: .5rem; text-align: center; font-family: helvetica; font-size: 3rem; color:#091D3C"> Open </h1>
+  <h2 style=" padding-top: .5rem; text-align: center; font-family: helvetica; font-size: 3rem; color:#091D3C">
+    {{openedTicketsCount}}
+  </h2>
+</div>
+<div class="info-var">
+  <h1 style=" padding-top: .5rem; text-align: center; font-family: helvetica; font-size: 3rem; color:#091D3C"> Closed </h1>
+  <h2 style=" padding-top: .5rem; text-align: center; font-family: helvetica; font-size: 3rem; color:#091D3C">
+    {{closedTicketsCount}}
+  </h2>
+</div>
+
+  </div>
+
+
+  <br>
+  <br>
+
+  <div class="container-fluid">
+    <form [formGroup]="keywordForm">
+      <mat-form-field appearance="outline">
+        <mat-label>Search Ticket</mat-label>
+        <input matInput placeholder="Enter Data" formControlName="keyword"
+          (input)="onSearchChange($event.target.value)">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </form>
+  </div>
+
+  <div class="myTable">
+    <div>
+      <table matSort (matSortChange)="sortData($event)" mat-table [dataSource]="allTickets" class="mat-elevation-z8">
+        <ng-container matColumnDef="ticket_number_pk">
+          <th mat-header-cell *matHeaderCellDef>Ticket ID</th>
+          <td mat-cell *matCellDef="let element"> {{element.ticket_number_pk}} </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-sort-header="name" mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="firstname">
+          <th mat-header-cell *matHeaderCellDef> Tech First </th>
+          <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+        </ng-container>
+        <ng-container matColumnDef="lastname">
+          <th mat-header-cell *matHeaderCellDef> Tech Last </th>
+          <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+        </ng-container>
+        <ng-container matColumnDef="category_type">
+          <th mat-header-cell *matHeaderCellDef> Category </th>
+          <td mat-cell *matCellDef="let element"> {{element.category_type}} </td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+        </ng-container>
+        <ng-container matColumnDef="created_date">
+          <th mat-sort-header="createdDate" mat-header-cell *matHeaderCellDef> Created Date </th>
+          <td mat-cell *matCellDef="let element"> {{element.created_date}}</td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-slide-toggle [checked]="element.active" (change)="onActiveSlide($event, element)">
+            </mat-slide-toggle>
+            <button style="margin-left: 1rem;"(click)="openModal(ticketEdit, element)" class=" btn edit-btn">
+              edit
+            </button>
+            <button (click)="openModal(ticketCom, element)" class=" btn edit-btn">
+              comments
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="ticketsCols"></tr>
+        <tr mat-row *matRowDef="let row; columns: ticketsCols;"></tr>
+      </table>
+    </div>
+  </div>
+<br>
+  <br>
+
+  <table-pagination *ngIf="universalCount != null" (page)="promiseForTable($event)" [itemsTotal]="universalCount"
+    [pageSize]="pSize"> </table-pagination>
+
+  <ng-template #ticketEdit let-c="close" let-d="dismiss">
+    <div class="mat-style" >
+
+
+        <form [formGroup]="ticketForm">
+            <div class="modal-header">
+              <h3 class="modal-title">Ticket Modification: {{currentTicket.name}} </h3>
+            </div>
+            <div class="modal-body">
+              <mat-form-field appearance="outline"class="form-element">
+                  <mat-label> Name </mat-label>
+                <input matInput placeholder="Ticket Name" formControlName="name">
+              </mat-form-field>
+              <mat-form-field  style="margin-left: 2rem;" appearance="outline" class="form-element">
+                <mat-label> Description </mat-label>
+                <textarea matInput placeholder="Ticket Description" formControlName="description"></textarea>
+              </mat-form-field>
+              <mat-form-field style="margin-left: 2rem;" appearance="outline" class="form-element" color="primary">
+                <mat-label placehoder="Technician Assigned">{{this.value}}</mat-label>
+                <mat-select formControlName="techAssigned" (selectionChange)="selectedTech($event)">
+                  <mat-option *ngFor="let tech of technicians" [value]="tech.user_id_pk">
+                    {{tech.firstname}} {{tech.lastname}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <br>
+              <mat-form-field  appearance="outline" class="form-element">
+                  <mat-label> Comments </mat-label>
+                <textarea matInput placeholder="Technician Comments" formControlName="techComment"></textarea>
+              </mat-form-field>
+              <mat-form-field style="margin-left: 2rem;" appearance="outline" class="form-element" color="primary">
+                <mat-label>{{this.value}}</mat-label>
+                <mat-select formControlName="status" placeholder="Select status" (selectionChange)="selectedStatus($event)">
+                  <mat-option *ngFor="let stat of statusList" [value]="stat.status_id_pk">
+                    {{stat.status}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field style="margin-left: 2rem;" appearance="outline" class="form-element" color="primary">
+                <mat-label>{{this.value}}</mat-label>
+                <mat-select formControlName="category" placeholder="Select category" (selectionChange)="selectedCat($event)">
+                  <mat-option *ngFor="let cat of categories" [value]="cat.category_id_pk">
+                    {{cat.category_type}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <br>
+              <br>
+              <mat-form-field appearance="outline" class="example-full-width form-element">
+                <input (dateChange)="dateChange($event)" matInput [matDatepicker]="picker" placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker touchUi #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="modal-footer">
+              <div class="form-group">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <div class="form-group">
+                    <button class="btn btn-form" (click)="updateTicket(ticketForm.value)">Save</button>
+                  </div>
+                  <div class="form-group">
+                    <button class="btn btn-form" (click)="onCancelClick()">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+    </div>
+    
+  </ng-template>
+  <ng-template #ticketCom let-c="close" let-d="dismiss">
+    <div class="mat-style">
+        <form [formGroup]="commentForm">
+            <div class="modal-header">
+              <h3 class="modal-title">Add Comments: {{currentTicket.name}} </h3>
+            </div>
+            <div class="modal-body">
+              <mat-form-field appearance="outline" class="form-element">
+                <textarea matInput placeholder="Technician Comments" formControlName="comments"></textarea>
+              </mat-form-field>
+            </div>
+            <div class="modal-footer">
+              <div class="form-group">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <div class="form-group">
+                    <button class="btn btn-form" (click)="addComments(commentForm.value)">Save</button>
+                  </div>
+                  <div class="form-group">
+                    <button class="btn btn-form" (click)="onCancelClick()">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+    </div>
+    
+  </ng-template>

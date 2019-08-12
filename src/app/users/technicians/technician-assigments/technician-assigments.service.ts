@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { Observable } from 'rxjs';
 import { ITechniciansAssigned } from '../../categoriesTechnicianAssigned';
 
@@ -29,5 +28,13 @@ export class TechnicianAssigmentsService {
     return this.http.delete<ITechniciansAssigned>("http://localhost:44444/Categories/CategoriesTechnicianAssignedRemove/" + techId + "/" + catId);
   }
 
+  getTechAssignments(pageNum: number, pageSize: number, id: number) {
+    return this.http.get("http://localhost:44444/Users/TechnicianAssignmentSelectById/" + pageNum + "/" +
+    pageSize + "/" + id).toPromise();
+  }
+
+  getTechAssignmentsCount(id: number) {
+    return this.http.get("http://localhost:44444/Users/TechnicianAssignmentSelectByIdCount/" + id).toPromise();
+  }
 
 }

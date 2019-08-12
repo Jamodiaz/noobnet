@@ -3,9 +3,12 @@ import { CategoriesService } from '../categories.service';
 import { Icategories } from '../interfaces/categories';
 import { ModalService } from 'src/app/services/modal.service';
 import { Itechnicians } from 'src/app/users/technicians';
-import { Sort } from '@angular/material';
+import { Sort, MatRadioChange } from '@angular/material';
 import { UsersService } from 'src/app/users/users.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { HomeComponent } from 'src/app/home/home/home.component';
+import { MyHomeService } from 'src/app/home/home/my-home.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-categories-list',
@@ -16,18 +19,84 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class CategoriesListComponent implements OnInit {
 
+
+
   // Controllers for data
   categories: Icategories[];
   currentCategory: Icategories;
   technicians: Itechnicians[];
   currentTechnician: Itechnicians;
 
+  tableControl: string = "Active";
+
+  keywordForm: FormGroup;
+
+  keyword: string = "_";
+  pSize: number = 6;
+  pageNum: number = 1;
+
+  catCols: string[] = ["category_id_pk", "category_type", "created_date", "info", "edit", "active"];
+
+  allCategories: Icategories;
+  allCategoriesCount: number;
+
+  catCount: number;
+  activeCatCount: number;
+  inactiveCatCount: number;
+
   constructor(private categoriesService: CategoriesService,
     private modalService: ModalService,
-    private authService: AuthService) { }
+    private authService: AuthService, private homeService: MyHomeService, 
+    private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.promiseForTable(this.pageNum);
+    this.formInit();
     this.getCategories();
+    this.getCategoriesCount();
+    this.getActiveCatCount();
+    this.getInactiveCatCount();
+  }
+
+  formInit(): Promise<void> {
+    this.keywordForm = this.formBuilder.group({
+      keyword: [""]
+    });
+
+    return Promise.resolve();
+  }
+
+  
+  // Method that handles the angular material radio buttons 
+  onChange(changed: MatRadioChange) {
+    if (changed.value === "Active")
+      this.tableControl = changed.value;
+    else if (changed.value === "Inactive")
+      this.tableControl = changed.value;
+
+    this.promiseForTable(this.pageNum);
+  }
+
+  onSearchChange(event: string) {
+    this.keyword = event;
+    this.promiseForTable(this.pageNum);
+  }
+
+  async promiseForTable(event: any) {
+    this.pageNum = event;
+    if(this.tableControl === "Active") {
+      let cat = await this.categoriesService.getCategoriesSearch(this.keyword,this.pageNum,this.pSize);
+      this.allCategories = cat["Data"];
+      let count = await this.categoriesService.getCategoriesSearchCount(this.keyword);
+      this.allCategoriesCount = count['Data'];
+    }
+    else if (this.tableControl === "Inactive") {
+      let cat = await this.categoriesService.getCategoriesInactiveSearch(this.keyword,this.pageNum,this.pSize);
+      this.allCategories = cat["Data"];
+      let count = await this.categoriesService.getCategoriesInactiveSearchCount(this.keyword);
+      this.allCategoriesCount = count['Data'];
+    }
+    
   }
 
   // This method saves the id of the selected category
@@ -46,6 +115,8 @@ export class CategoriesListComponent implements OnInit {
       this.promiseCategoryEditActiveState(category, event.checked).then(updatedCategory => {
         this.categoriesService.updateCategoryActiveState(updatedCategory).subscribe(res => {
           this.getCategories();
+          this.getActiveCatCount();
+          this.getInactiveCatCount();
         });
       })
     }else return;
@@ -61,9 +132,26 @@ export class CategoriesListComponent implements OnInit {
   // This method gets all the categories 
   getCategories() {
     this.categoriesService.getCategoriesList().subscribe((categories: Icategories) => {
-      console.log('getCategories: ', categories);
       this.categories = categories['Data'];
-    })
+    });
+  }
+
+  getCategoriesCount() {
+    this.homeService.getCategoriesCount().subscribe(res => {
+      this.catCount = res['Data'];
+    });
+  }
+
+  getActiveCatCount() {
+    this.categoriesService.categoryActiveCount().subscribe((count: any) => {
+      this.activeCatCount = count['Data'][0];
+    });
+  }
+
+  getInactiveCatCount() {
+    this.categoriesService.categoryInactiveCount().subscribe((count: any) => {
+      this.inactiveCatCount = count['Data'][0];
+    });
   }
 
   // This method opens the modal for the create and edit category child component
@@ -78,7 +166,7 @@ export class CategoriesListComponent implements OnInit {
     this.promiseCategoryCreate(category).then(newCategory => {
       this.categoriesService.createCategory(newCategory).subscribe(res => {
         this.modalService.closeModal();
-        this.getCategories();
+        this.promiseForTable(this.pageNum);
       });
     })
   }
@@ -87,7 +175,7 @@ export class CategoriesListComponent implements OnInit {
     let newCategory: Icategories = {
       category_type: category.categoryType,
       category_description: category.categoryDescription,
-      created_by: this.authService.userTechnician.user_id_pk
+      created_by: this.authService.authenticated.User_id_pk
     }
     return Promise.resolve(newCategory);
   }
@@ -98,7 +186,7 @@ export class CategoriesListComponent implements OnInit {
     this.promiseCategoryEdit(category).then(updatedCategory => {
       this.categoriesService.updateCategory(updatedCategory).subscribe(res => {
         this.modalService.closeModal();
-        this.getCategories();
+        this.promiseForTable(this.pageNum);
       });
     })
   }
@@ -107,7 +195,7 @@ export class CategoriesListComponent implements OnInit {
       category_id_pk: this.saveCurrentId(),
       category_type: category.categoryType,
       category_description: category.categoryDescription,
-      modified_by: this.authService.userTechnician.user_id_pk
+      modified_by: this.authService.authenticated.User_id_pk
     }
     return Promise.resolve(updatedCategory);
   }

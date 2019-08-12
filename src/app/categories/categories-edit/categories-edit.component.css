@@ -3,10 +3,10 @@
   }
 
 .modal-header {
-    background-color:  #475283;
+    background-color: #091D3C;
     color: #D3D6E1;
+    width: 100%;
 }
-
 
  .btn-form {
     margin-right: 1rem;
@@ -21,10 +21,12 @@
     font-size: 2rem;
     border-radius: 12px;
     border: 2px solid  #091D3C;
-    background-color: #475283;
+    background-color: #091D3C;
     color:  #D3D6E1;
 }
 
 textarea {
     resize: none;
 }
+
+

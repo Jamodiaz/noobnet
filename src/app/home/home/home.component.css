@@ -25,7 +25,7 @@ h3 {
     color: #091D3C;
     display: flex;
     flex-direction: column;
-    /* min-height: 100vh;  */
+    border: 5px solid #091D3C;
 }
 
 
@@ -37,7 +37,14 @@ div.customCard {
     margin: 1rem;
     box-shadow: none;
     background-color: transparent;
-    border: 2px solid #091D3C;
+    border: 5px solid #091D3C;
+}
+
+div.customCard2 {
+    margin: 1rem;
+    box-shadow: none;
+    background-color: #D3D6E1;
+    border: 6px solid #091D3C;
 }
 
 h5 {
@@ -50,4 +57,26 @@ p,i {
     color: #475283;
     font-weight: bold;
     font-size: 1.5rem;
+}
+
+.heading-toola {
+    padding-top: 3rem;
+}
+
+.home-menu {
+    border-radius: 15px 50px 30px 5px; 
+    border-color: #091D3C;
+    border-style: solid;
+    border-width: 5px;
+    width: 100%;
+    height: 9rem;
+    background-color: #D3D6E1;
+}
+
+.home-title {
+    border-radius: 0px 10px 40px 0px;
+    text-align: left; 
+    width: 20%;
+    height: 5rem;
+    background-color: #091D3C;
 }

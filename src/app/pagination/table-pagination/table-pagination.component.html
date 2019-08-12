@@ -1,0 +1,9 @@
+<div class="container">
+    <div class="row text-center" style="display: flex; justify-content: center">
+    <button class="btn btn-paginator text-center" (click)="goToPrevPage()" [disabled]="pageNumber &lt;= 1"><i class="material-icons paginator-arrow">chevron_left</i></button>
+    <p  style="font-size: 2rem; font-weight: bold; color: #091D3C;"class="paginator-margin">Page: 
+    <input style="margin-right: 3px; " size="1" type="text" [(ngModel)]="pageNumber" (change)="changedPageNumInput($event)"/>of {{paginatorSize}}
+    </p>
+    <button class="btn btn-paginator text-center" (click)="goToNextPage()" [disabled]="pageNumber &gt;= paginatorSize"><i class="material-icons paginator-arrow">chevron_right</i></button>
+    </div>
+    </div>

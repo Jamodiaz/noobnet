@@ -1,28 +1,33 @@
 import { Injectable } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Iusers } from '../users/users-and-technicians/users';
+import { LogInService } from '../log-in/log-in.service';
+import { Iauth } from './auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
 
-  userTechnician = {
-    user_id_pk: 1,
-    firstname: "Hilmaris",
-    lastname: "Sepulveda",
-    email: "hilma@noobnet.com",
-    phone: "7873332323",
-    role_type_fk: 1
+  authenticated: Iauth;
+
+  constructor(public jwtHelper: JwtHelperService, private log: LogInService) { }
+
+  public isAuthenticated(): boolean {
+
+    const token = localStorage.getItem('Access_token');
+    let role = localStorage.getItem('Role');
+    let email = localStorage.getItem('AuthEmail');
+
+    this.authenticatedUser(role, email);
+
+    return !this.jwtHelper.isTokenExpired(token);
   }
 
-  userClient = {
-    user_id_pk: 11,
-    firstname: "Paola",
-    lastname: "Contreras",
-    email: "paolita@noobnet.com",
-    phone: "7879998877",
-    role_type_fk: 2
+  async authenticatedUser(role, email) {
+    let authenticated: any = await this.log.getAuthenticated(email);
+    this.authenticated = authenticated.Data;
   }
 
 }

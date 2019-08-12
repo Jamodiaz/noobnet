@@ -1,4 +1,4 @@
-<div class="larger">
+<div class="larger transparent-mode">
     <div class="modal-header">
         <h3 class="modal-title" *ngIf="category!=null">{{category.category_type}}</h3>
         <h3 class="modal-title" *ngIf="category===null">New Category</h3>
@@ -7,7 +7,7 @@
         <div class="modal-body">
             <div class="form-group">
                 <label>Category Type</label>
-                <input placeholder="Please enter the category type" type="text" formControlName="categoryType" class="form-control larger"
+                <input style="color:  #091D3C" placeholder="Please enter the category type" type="text" formControlName="categoryType" class="form-control larger"
                     [ngClass]="{ 'is-invalid': submitted && f.categoryType.errors }" />
                 <div *ngIf="submitted && f.categoryType.errors" class="invalid-feedback">
                     <div *ngIf="f.categoryType.errors.required">Category type is required</div>
@@ -15,7 +15,7 @@
             </div>
             <div class="form-group">
                 <label>Category Description</label>
-                <textarea  placeholder="Please enter the category description" type="text" formControlName="categoryDescription" class="form-control larger"
+                <textarea style="color:  #091D3C" placeholder="Please enter the category description" type="text" formControlName="categoryDescription" class="form-control larger"
                     [ngClass]="{ 'is-invalid': submitted && f.categoryDescription.errors }"></textarea>
                 <div *ngIf="submitted && f.categoryDescription.errors" class="invalid-feedback">
                     <div *ngIf="f.categoryDescription.errors.required">Category Description is required</div>

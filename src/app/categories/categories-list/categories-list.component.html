@@ -1,38 +1,89 @@
 <div class="background">
-  <div class="heading-tools myHead align">
-    <h1 class="title-style">
-      Categories
-    </h1>
-    <br>
-    <div class="align">
-      <button  [routerLink]="['/home']" class="btn my-btn ">
-        Home
-      </button>
-      <button [routerLink]="['/usersandtechnicians']" class="btn my-btn ">
-        Users & Technicians
-      </button>
-      <button [routerLink]="['/technicianassigments']" class="btn my-btn ">
-        Technician Assignments
-      </button>
-      <br>
-      <br>
-      <button type="button" class="btn my-btn" (click)="openModal(categoryCreate, null)">
-        Add New
-      </button>
+    <div class="categories-menu">
+        <div class="categories-title">
+          <h1 style=" padding-top: .5rem; text-align: center; font-family: helvetica; font-size: 3rem; color:  #D3D6E1"> Categories </h1>
+        </div>
+      </div>
+  <br>
+  <br>
+  <div class="row container-fluid ">
+    <div class="  content-var align-mycenter">
+            <div class="">
+              <h1 style=" padding-top: .5rem; padding-left: 1rem; text-align: left; font-family: helvetica; font-size: 3rem; color:#091D3C"> Navigate</h1>
+            </div>
+          <br>
+      <div class="row  container-fluid">
+          <button style="margin-left: 7rem;" [routerLink]="['/home']" class="btn my-btn ">
+            Home
+          </button>
+          <button [routerLink]="['/usersandtechnicians']" class="btn my-btn ">
+            Users & Technicians
+          </button>
+          <button [routerLink]="['/technicianassigments']" class="btn my-btn ">
+            Technician Assignments
+          </button>
+      </div>
     </div>
+<div class="add-var">
+    <div class="">
+        <h1 style=" padding-top: .5rem; text-align: center; font-family: helvetica; font-size: 3rem; color:#091D3C"> Create Category</h1>
+      </div>
+      <br>
+      <button style="margin-left: 7rem; "type="button" class="btn my-btn" (click)="openModal(categoryCreate, null)">
+          Add New
+        </button>
+</div>
+
+<div class=" info-var">
+  <h1 style=" padding-top: .5rem; text-align: center; font-family: helvetica; font-size: 3rem; color:#091D3C"> Count </h1>
+  <h2 style=" padding-top: .5rem; text-align: center; font-family: helvetica; font-size: 3rem; color:#091D3C">
+    {{catCount}}
+  </h2>
+</div>
+<div class="info-var">
+    <h1 style=" padding-top: 1rem; text-align: center; font-family: helvetica; font-size: 3rem; color:#091D3C"> Active : {{activeCatCount}} </h1>
+    <h2 style=" padding-top: .5rem; text-align: center; font-family: helvetica; font-size: 3rem; color:#091D3C">
+      Inactive : {{inactiveCatCount}}
+    </h2>
+</div>
+  </div>
+  <br>
+  <br>
+  <div class="container-fluid">
+    <div  class=" container-fluid">
+        <form [formGroup]="keywordForm">
+            <mat-form-field appearance="outline">
+                <mat-label>Search Category</mat-label>
+                <input matInput placeholder="Enter Data" formControlName="keyword" (input)="onSearchChange($event.target.value)">
+                <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field>
+        </form>
+    </div>
+    <br>
+    <br>
+    <div class="container-fluid small-content align-mycenter">
+        <mat-radio-group (change)="onChange($event)"  aria-label="Select an option">
+            <mat-radio-button style=" font-size: 3rem;" class="radio-style" value="Active">  Active </mat-radio-button>
+            <mat-radio-button style="font-size: 3rem;  margin-left: 2rem;" class="radio-style" value="Inactive"> Inactive </mat-radio-button>
+          </mat-radio-group>
+    </div> 
   </div>
   <table matSort (matSortChange)="sortData($event)" class="myTable table table-dark">
     <thead class="table-header ">
       <tr>
+        <th scope="col">Category ID</th>
         <th mat-sort-header="categoryType" scope="col">Category Type</th>
+        <th  scope="col">Created Date</th>
         <th scope="col">Info</th>
         <th scope="col">Edit</th>
         <th mat-sort-header="active" scope="col">Active</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let category of categories">
+      <tr *ngFor="let category of allCategories">
+        <td>{{category.category_id_pk}}</td>
         <td>{{category.category_type}} </td>
+        <td>{{category.created_date}}</td>
         <td> <button type="button" class="action-btn btn "
             (click)="openModal(categoryDetail, category, technician)">info</button> </td>
         <td> <button type="button" class="action-btn btn "
@@ -44,6 +95,8 @@
       </tr>
     </tbody>
   </table>
+  <br>
+<table-pagination *ngIf="allCategoriesCount != null" (page)="promiseForTable($event)"  [itemsTotal]="allCategoriesCount" [pageSize]="pSize"> </table-pagination>
 </div>
 
 <ng-template #categoryDetail let-c="close" let-d="dismiss">

@@ -11,20 +11,28 @@ export class UsersService {
 
   constructor(private http:HttpClient) { }
 
-  getTechnicians() {
+  getTechnicians() : Observable<Iusers>  {
     return this.http.get("http://localhost:44444/Users/UsersSelectByRole/1");
   }
 
-  getUsers() {
+  getUsers() : Observable<Iusers>  {
     return this.http.get("http://localhost:44444/Users/UsersSelectByRole/2");
   }
 
-  getAllUsers() {
+  getAllUsers() : Observable<Iusers> {
     return this.http.get("http://localhost:44444/Users/UsersSelectAll");
   }
 
-  getRoles() {
+  getTechniciansByCategoryAssigned(id: number) : Observable<Iusers> {
+    return this.http.get("http://localhost:44444/Users/TechnicianSelectByCategoryAssigned/" + id);
+  }
+
+  getRoles() : Observable<Iroles>  {
     return this.http.get("http://localhost:44444/Role/RoleSelectAll");
+  }
+
+  getActiveRoles() : Observable<Iroles> {
+    return this.http.get("http://localhost:44444/Role/RoleUpdateActiveState");
   }
 
   createUser(user: Iusers) : Observable<Iusers> {
@@ -43,10 +51,63 @@ export class UsersService {
     return this.http.patch<Iroles>("http://localhost:44444/Role/RoleUpdate", role);
   }
 
-
   updateRoleActiveState(role: Iroles):  Observable<Iroles>{
   return this.http.patch<Iroles>("http://localhost:44444/Role/RoleUpdateActiveState", role);
     }
 
+  getAllRolesPagination(pageNum: number, pageSize: number) {
+    return this.http.get("http://localhost:44444/Role/RolesSelectAllPagination/" 
+    + pageNum + "/" + pageSize).toPromise();
+  }
+
+  getAllActiveRolesSearch (keyword: string, pageNum: number, pageSize: number) {
+    return this.http.get("http://localhost:44444/Role/RolesSelectAllActiveSearch/" 
+    + keyword + "/" + pageNum + "/" + pageSize).toPromise();
+  }
+
+  getAllInactiveRolesSearch (keyword: string, pageNum: number, pageSize: number) {
+    return this.http.get("http://localhost:44444/Role/RolesSelectAllInactiveSearch/" 
+    + keyword + "/" + pageNum + "/" + pageSize).toPromise();
+  }
+
+  getAllActiveRolesSearchCount (keyword: string) {
+    return this.http.get("http://localhost:44444/Role/RolesSelectAllActiveSearchCount/" 
+    + keyword).toPromise();
+  }
+
+  getAllInactiveRolesSearchCount (keyword: string) {
+    return this.http.get("http://localhost:44444/Role/RolesSelectAllInactiveSearchCount/" 
+    + keyword).toPromise();
+  }
+
+  getAllTechSearch(keyword: string, pageNum: number, pageSize: number) {
+    return this.http.get("http://localhost:44444/Users/TechniciansSelectAllSearch/" 
+    + keyword + "/" + pageNum + "/" + pageSize).toPromise();
+  }
+
+  getAllUsersSearch(keyword: string, pageNum: number, pageSize: number) {
+    return this.http.get("http://localhost:44444/Users/UsersSelectAllSearch/" 
+    + keyword + "/" + pageNum + "/" + pageSize).toPromise();
+  }
+
+  getAllTechSearchCount (keyword: string) {
+    return this.http.get("http://localhost:44444/Users/TechniciansSelectAllSearchCount/" 
+    + keyword).toPromise();
+  }
+
+  getAllUsersSearchCount (keyword: string) {
+    return this.http.get("http://localhost:44444/Users/UsersSelectAllSearchCount/" 
+    + keyword).toPromise();
+  }
+
+  getAllSearch(keyword: string, pageNum: number, pageSize: number) {
+    return this.http.get("http://localhost:44444/Users/UsersAndTechniciansSelectAllSearch/" 
+    + keyword + "/" + pageNum + "/" + pageSize).toPromise();
+  }
+
+  getAllSearchCount(keyword: string) {
+    return this.http.get("http://localhost:44444/Users/UsersAndTechniciansSelectAllSearchCount/" 
+    + keyword).toPromise();
+  }
 
 }

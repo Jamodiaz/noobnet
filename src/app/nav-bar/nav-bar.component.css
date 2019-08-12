@@ -1,0 +1,25 @@
+nav.navbar-color {
+    background-color: #25326A;
+    border-color: #E7E7E7;
+    color: white;
+}
+
+.navbar-brand {
+    color: white;
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+.nav-link {
+    color: white;
+}
+
+.nav-item :hover {
+    color: #F06798;
+}
+
+i.titleIcon {
+    font-size: 4rem;
+    padding-right: .5rem;
+}
+

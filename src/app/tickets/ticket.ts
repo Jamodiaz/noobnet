@@ -1,4 +1,5 @@
 export interface Itickets {
+    name?: string,
     ticket_number_pk?: number,
     description?: string,
     tech_comments?: string,

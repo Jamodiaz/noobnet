@@ -1,5 +1,5 @@
 export interface Itechnicians {
-    user_id_pk: number,
+    User_id_pk: number,
     firstName: string,
     lastName: string,
     email: string,

@@ -1,0 +1,14 @@
+.btn-paginator {
+    background-color:  transparent;
+     color: #D3D6E1;
+}
+
+.paginator-margin {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+.paginator-arrow {
+    color: #D3D6E1;
+}

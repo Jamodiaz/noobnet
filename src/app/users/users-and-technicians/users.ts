@@ -1,5 +1,5 @@
 export interface Iusers {
-    user_id_pk?: number,
+    User_id_pk?: number,
     firstName?: string,
     lastName?: string,
     email?: string,
@@ -8,5 +8,6 @@ export interface Iusers {
     created_date?: Date,
     modified_by?: number,
     modified_date?: Date,
-    role_type_fk?: number
+    role_type_fk?: number,
+    password?: string
 }

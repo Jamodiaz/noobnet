@@ -1,10 +1,98 @@
-<div class="background">
-  <div class="heading-tools ">
-    <h1 class="title-style">Home</h1>
+<div class="background ">
+  <div class="home-menu">
+    <div class="home-title">
+      <h1 style=" padding-top: .5rem; text-align: center; font-family: helvetica; font-size: 3rem; color:  #D3D6E1">
+        Home </h1>
+    </div>
   </div>
-  <div class="menu-tool ">
+  <br>
+  <br>
+  <div *ngIf="role === 'Technician'" class="container-fluid align-mycenter">
+    <div class="row">
+      <div class="card-group card-style">
+        <div class="card mb customCard2">
+          <div class="card-header" style="text-align: center">
+            <i class="material-icons" style="font-size: 400%;">assignment</i>
+            <div class="card-body">
+              <h5 class="card-title">Categories List Count</h5>
+              <p class="card-text">
+                Count:
+              </p>
+              <h2>
+                {{catCount}}
+              </h2>
+            </div>
+          </div>
+        </div>
+        <div class="card mb customCard2" [routerLink]="['/usersandtechnicians']">
+          <div class="card-header" style="text-align: center">
+            <i class="material-icons" style="font-size: 400%;">assignment</i>
+            <div class="card-body">
+              <h5 class="card-title">Tickets List Count</h5>
+              <p class="card-text">
+                Count:
+              </p>
+              <h2>
+                {{ticketCount}}
+              </h2>
+            </div>
+          </div>
+        </div>
+        <div class="card mb customCard2" [routerLink]="['/usersandtechnicians']">
+          <div class="card-header" style="text-align: center">
+            <i class="material-icons" style="font-size: 400%;">edit</i>
+            <i class="material-icons" style="font-size: 400%;">assignment</i>
+            <div class="card-body">
+              <h5 class="card-title">Roles List Count</h5>
+              <br>
+              <p class="card-text">
+                Count:
+              </p>
+              <br>
+              <h2>
+                {{roleCount}}
+              </h2>
+            </div>
+          </div>
+        </div>
+        <div class="card mb customCard2" [routerLink]="['/technicianassigments']">
+          <div class="card-header" style="text-align: center">
+            <i class="material-icons" style="font-size: 400%;">assignment_ind</i>
+            <div class="card-body">
+              <h5 class="card-title">Technician List Count</h5>
+              <p class="card-text">
+                Count:
+              </p>
+              <h2>
+                {{techCount}}
+              </h2>
+            </div>
+          </div>
+        </div>
+        <div class="card mb customCard2" [routerLink]="['/technicianassigments']">
+          <div class="card-header" style="text-align: center">
+            <i class="material-icons" style="font-size: 400%;">assignment_ind</i>
+            <div class="card-body">
+              <h5 class="card-title">Client List Count</h5>
+              <br>
+              <p class="card-text">
+                Count:
+              </p>
+              <br>
+              <h2>
+                {{clientCount}}
+              </h2>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="role === 'Technician'" class="menu-tool ">
     <h1>
-      Welcome to IT-Ticket-Center
+      Welcome to IT-Ticket-Admin-Center
     </h1>
     <br>
     <h2>
@@ -35,6 +123,67 @@
                 <h5 class="card-title">Users and Technicians</h5>
                 <p class="card-text">
                   Create and edit users and roles
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="card mb customCard" [routerLink]="['/technicianassigments']">
+            <div class="card-header" style="text-align: center">
+              <i class="material-icons" style="font-size: 250%;">assignment_ind</i>
+              <i class="material-icons" style="font-size: 400%;">edit</i>
+              <div class="card-body">
+                <h5 class="card-title">Technician Assignments</h5>
+                <p class="card-text">
+                  Assign or remove categories
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div *ngIf="role === 'Client'" class="menu-tool ">
+    <h1>
+      Welcome to IT-Ticket-Center
+    </h1>
+    <br>
+    <h2>
+      This module offers a variety of screens to manage your Tickets
+    </h2>
+    <br>
+    <h3>
+      NAVIGATE TO:
+    </h3>
+    <div class="container">
+      <div class="row">
+        <div class="card-group card-style">
+          <div class="card mb customCard" [routerLink]="['/ticketcreation']">
+            <div class="card-header" style="text-align: center">
+              <i class="material-icons" style="font-size: 400%;">assignment</i>
+              <div class="card-body">
+                <h5 class="card-title"> IT Ticket Creation</h5>
+                <br>
+                <br>
+                <p class="card-text">
+                  Create a new IT Ticket
+                </p>
+
+              </div>
+            </div>
+          </div>
+          <div class="card mb customCard" [routerLink]="['/mytickets']">
+            <div class="card-header" style="text-align: center">
+              <i class="material-icons" style="font-size: 400%;">assignment_ind</i>
+              <div class="card-body">
+                <h5 class="card-title">My Tickets</h5>
+                <br>
+                <br>
+                <p class="card-text">
+                  View the tickets you haVe created
                 </p>
               </div>
             </div>

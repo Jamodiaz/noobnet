@@ -2,25 +2,29 @@
   <div class="modal-header">
     <h3 class="modal-title">Edit User</h3>
   </div>
-  <form class="container"[formGroup]="usersEditForm">
+  <form class="container-fluid" [formGroup]="usersEditForm">
     <div class="modal-body">
-      <mat-form-field class="form-element">
+      <mat-form-field appearance="outline"  >
+          <mat-label>First Name</mat-label>
         <input matInput placeholder="First Name" formControlName="firstName">
       </mat-form-field>
       <br>
-      <mat-form-field class="form-element">
+      <mat-form-field appearance="outline"  class="form-element">
+          <mat-label>Last Name</mat-label>
         <input matInput placeholder="Last Name" formControlName="lastName">
       </mat-form-field>
       <br>
-      <mat-form-field class="form-element">
+      <mat-form-field appearance="outline"  class="form-element">
+          <mat-label>Email</mat-label>
         <input matInput placeholder="Email address" formControlName="email">
       </mat-form-field>
       <br>
-      <mat-form-field class="form-element">
+      <mat-form-field appearance="outline"  class="form-element">
+          <mat-label>Phone</mat-label>
         <input matInput placeholder="Phone" formControlName="phone">
       </mat-form-field>
       <br>
-      <mat-form-field color="primary">
+      <mat-form-field appearance="outline"  color="primary">
         <mat-label>{{this.value}}</mat-label>
         <mat-select formControlName="role" matInput placeholder="Select role" (selectionChange)="selectedRole($event)">
           <mat-option *ngFor="let role of roles" [value]="role.role_id_pk">

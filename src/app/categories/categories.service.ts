@@ -39,5 +39,30 @@ export class CategoriesService {
     return this.http.post<Icategories>("http://localhost:44444/Categories/CategoriesCreate", category);
   }
 
+  categoryActiveCount() {
+    return this.http.get("http://localhost:44444/Categories/CategoriesActiveCount");
+  }
+
+  categoryInactiveCount() {
+    return this.http.get("http://localhost:44444/Categories/CategoriesInactiveCount");
+  }
+
+  getCategoriesSearch(keyword: string, pageNum: number, pageSize) {
+    return this.http.get("http://localhost:44444/Categories/CategoriesSelectAllSearch/" + keyword +
+     "/" + pageNum + "/" + pageSize).toPromise();
+  }
+
+  getCategoriesSearchCount(keyword: string) {
+    return this.http.get("http://localhost:44444/Categories/CategoriesSelectAllSearchCount/" + keyword ).toPromise()
+  }
+
+  getCategoriesInactiveSearch(keyword: string, pageNum: number, pageSize) {
+    return this.http.get("http://localhost:44444/Categories/CategoriesSelectAllInactiveSearch/" + keyword +
+     "/" + pageNum + "/" + pageSize).toPromise();
+  }
+
+  getCategoriesInactiveSearchCount(keyword: string) {
+    return this.http.get("http://localhost:44444/Categories/CategoriesSelectAllInactiveSearchCount/" + keyword ).toPromise()
+  }
 
 }
