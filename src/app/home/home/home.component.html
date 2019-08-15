@@ -6,7 +6,6 @@
     </div>
   </div>
   <br>
-  <br>
   <div *ngIf="role === 'Technician'" class="container-fluid align-mycenter">
     <div class="row">
       <div class="card-group card-style">
@@ -145,7 +144,6 @@
 
   </div>
 
-
   <div *ngIf="role === 'Client'" class="menu-tool ">
     <h1>
       Welcome to IT-Ticket-Center
@@ -165,13 +163,13 @@
             <div class="card-header" style="text-align: center">
               <i class="material-icons" style="font-size: 400%;">assignment</i>
               <div class="card-body">
+    
                 <h5 class="card-title"> IT Ticket Creation</h5>
                 <br>
-                <br>
                 <p class="card-text">
-                  Create a new IT Ticket
+                  Create a new IT Ticket 
                 </p>
-
+            
               </div>
             </div>
           </div>
@@ -179,24 +177,30 @@
             <div class="card-header" style="text-align: center">
               <i class="material-icons" style="font-size: 400%;">assignment_ind</i>
               <div class="card-body">
+         
                 <h5 class="card-title">My Tickets</h5>
-                <br>
+         
                 <br>
                 <p class="card-text">
-                  View the tickets you haVe created
+                  View all the tickets you have created.
                 </p>
+           
               </div>
             </div>
           </div>
-          <div class="card mb customCard" [routerLink]="['/technicianassigments']">
+          <div class="card mb customCard" [routerLink]="['/profile']">
             <div class="card-header" style="text-align: center">
               <i class="material-icons" style="font-size: 250%;">assignment_ind</i>
               <i class="material-icons" style="font-size: 400%;">edit</i>
               <div class="card-body">
-                <h5 class="card-title">Technician Assignments</h5>
+    
+                <h5 class="card-title">Profile</h5>
+         
+                <br>
                 <p class="card-text">
-                  Assign or remove categories
+                  View or edit you IT Ticket Center profile
                 </p>
+           
               </div>
             </div>
           </div>

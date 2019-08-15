@@ -26,6 +26,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { MyTicketComponent } from './tickets/my-ticket/my-ticket.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { MyTicketComponent } from './tickets/my-ticket/my-ticket.component';
     LogInComponent,
     NavBarComponent,
     MyTicketComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

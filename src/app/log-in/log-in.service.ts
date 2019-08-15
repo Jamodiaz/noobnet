@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { tap, map, filter, retry, catchError } from 'rxjs/operators';
 import { Iusers } from '../users/users-and-technicians/users';
 import { Iroles } from '../users/roles';
+import { Iauth } from '../services/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -38,4 +39,7 @@ export class LogInService {
     return this.http.get<any>("http://localhost:44444/Users/getUser/" + email + "/").toPromise();
   }
 
+  createUserLogin(user: any) {
+    return this.http.post("http://localhost:44444/Users/CreateUserLogin", user).toPromise();
+  }
 }

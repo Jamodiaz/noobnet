@@ -217,7 +217,7 @@ export class UsersAndTechniciansComponent implements OnInit {
   
     this.currentRole = role;
   
-    this.roleEditForm.controls['roleType'].setValue(role.role_type);
+    this.roleEditForm.controls['roleType'].setValue(this.currentRole.role_type);
   }
 
   // This method opens the modal for the create and edit category child component
@@ -261,7 +261,6 @@ export class UsersAndTechniciansComponent implements OnInit {
   getRoles() {
     this.usersService.getRoles().subscribe((roles: Iroles) => {
       this.roles = roles['Data']
-      console.log(this.roles);
     })
   }
 
@@ -296,7 +295,7 @@ export class UsersAndTechniciansComponent implements OnInit {
       email: user.email,
       phone: user.phone,
       created_by: this.auth.authenticated.User_id_pk,
-      role_type_fk: this.idRole
+      Role_type_fk: this.idRole
     }
 
     return Promise.resolve(newUser);
@@ -306,25 +305,21 @@ export class UsersAndTechniciansComponent implements OnInit {
   // Method for editing the current selected user
   editUser(form): void {
     this.promiseUserEdit(form).then(newUser => {
-      
       this.usersService.editUser(newUser).subscribe(res => {
         
-        // this.getUsers();
-        // this.getTechnicians();
-        // this.getUsersAndTechnicians();
         this.modalService.closeModal();
       });
     });
   }
-  promiseUserEdit(user): Promise<Iusers> {
-    let newUser: Iusers = {
+  promiseUserEdit(user): Promise<any> {
+    let newUser: any = {
       User_id_pk: this.currentUser.User_id_pk,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
       phone: user.phone,
       modified_by: this.auth.authenticated.User_id_pk,
-      role_type_fk: user.role
+      Role_type_fk: user.role
     }
     return Promise.resolve(newUser);
   }

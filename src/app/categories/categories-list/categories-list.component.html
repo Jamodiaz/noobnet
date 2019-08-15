@@ -6,8 +6,49 @@
       </div>
   <br>
   <br>
+
+  <div clas="row">
+    <div class="col-md">
+        <div class="content-var align-mycenter">
+            <div class="">
+              <h1 style=" padding-top: .5rem; padding-left: 1rem; text-align: left; font-family: helvetica; font-size: 3rem; color:#091D3C"> Navigate</h1>
+            </div>
+          <br>
+      <div class="row  container-fluid">
+          <button style="margin-left: 7rem;" [routerLink]="['/home']" class="btn my-btn ">
+            Home
+          </button>
+          <button [routerLink]="['/usersandtechnicians']" class="btn my-btn ">
+            Users & Technicians
+          </button>
+          <button [routerLink]="['/technicianassigments']" class="btn my-btn ">
+            Technician Assignments
+          </button>
+      </div>
+    </div>
+    </div>
+    <div class="col-md">
+        <div class="add-var">
+            <div class="">
+                <h1 style=" padding-top: .5rem; text-align: center; font-family: helvetica; font-size: 3rem; color:#091D3C"> Create Category</h1>
+              </div>
+              <br>
+              <button style="margin-left: 7rem; "type="button" class="btn my-btn" (click)="openModal(categoryCreate, null)">
+                  Add New
+                </button>
+        </div>
+      </div>
+      <div class="col-sm">
+
+        </div>
+        <div class="col-">
+
+          </div>
+
+
+  </div>
   <div class="row container-fluid ">
-    <div class="  content-var align-mycenter">
+    <div class="content-var align-mycenter">
             <div class="">
               <h1 style=" padding-top: .5rem; padding-left: 1rem; text-align: left; font-family: helvetica; font-size: 3rem; color:#091D3C"> Navigate</h1>
             </div>

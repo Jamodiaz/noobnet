@@ -1,0 +1,37 @@
+<div class="background">
+
+
+  <div style="text-align: center;" class="info-profile">
+ 
+    <h1 style=" font-size: 1500%; color: #091D3C" class="material-icons">account_circle</h1>
+    <br>
+    <button (click)="openModal(usersEdit);" class="btn btn-edit material-icons">
+        edit
+     </button>
+    <h1 style="color: #091D3C; font-size:3rem; font-family: Helvetica;"> {{authenticated.Firstname}}
+      {{authenticated.Lastname}}
+    </h1>
+
+<br>
+    <h1 style="color: #091D3C; font-size:3rem;" class="material-icons"> email</h1>
+    <h1 style="color: #091D3C; font-size:3rem; font-family: Helvetica;"> {{authenticated.Email}}</h1>
+<br>
+    <h1 style="color: #091D3C; font-size:3rem;" class="material-icons">phone</h1>
+    <h1 style="color: #091D3C; font-size:3rem; font-family: Helvetica;"> {{authenticated.Phone}}</h1>
+<br>
+    <h1 style="color: #091D3C; font-size:3rem;" class="material-icons">stars</h1>
+    <h1 style="color: #091D3C; font-size:3rem; font-family: Helvetica;"> {{role}}</h1>
+
+ <br>
+ <button class="btn-log" (click)="logOut()">
+  Log Out
+ </button>
+ 
+  </div>
+
+</div>
+
+<ng-template #usersEdit let-c="close" let-d="dismiss">
+    <app-edit-users (formValue)="editUser($event)" [user]="currentUser" [roles]="roles">
+    </app-edit-users>
+  </ng-template>

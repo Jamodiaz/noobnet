@@ -24,7 +24,7 @@
         <input matInput placeholder="Phone" formControlName="phone">
       </mat-form-field>
       <br>
-      <mat-form-field appearance="outline"  color="primary">
+      <mat-form-field *ngIf="role === 'Technician'"appearance="outline"  color="primary">
         <mat-label>{{this.value}}</mat-label>
         <mat-select formControlName="role" matInput placeholder="Select role" (selectionChange)="selectedRole($event)">
           <mat-option *ngFor="let role of roles" [value]="role.role_id_pk">

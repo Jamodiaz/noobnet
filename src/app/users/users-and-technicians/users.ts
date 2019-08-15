@@ -8,6 +8,6 @@ export interface Iusers {
     created_date?: Date,
     modified_by?: number,
     modified_date?: Date,
-    role_type_fk?: number,
+    Role_type_fk?: number,
     password?: string
 }

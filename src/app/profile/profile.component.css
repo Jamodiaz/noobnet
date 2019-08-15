@@ -1,0 +1,54 @@
+.info-profile {
+    border-radius: 20px 20px 20px 20px;
+    width: 100%;
+    height: 60rem;
+    border-color: #091D3C;
+    border-style: solid;
+    border-width: 5px;
+    background-color: #D3D6E1;
+    box-shadow: 5px 10px rgba(9, 29, 60, 0.726);
+ }
+
+ .avatar {
+    vertical-align: center;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    border-color: #091D3C;
+    border-style: solid;
+    border-width: 5px;
+  }
+
+  .btn-log {
+    margin-right: 1rem;
+    font-size: 2rem;
+    border-radius: 12px;
+    border: 2px solid #091D3C;
+    background-color: transparent;
+    color: #091D3C;
+  }
+  
+  .btn-log:hover {
+    font-size: 2rem;
+    border-radius: 12px;
+    border: 2px solid  #091D3C;
+    background-color: #475283;
+    color:  #D3D6E1;
+  }
+
+  .btn-edit{
+  
+    font-size: 3rem;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    background-color: transparent;
+    color: #091D3C;
+  }
+  
+  .btn-edit:hover {
+    font-size: 3rem;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    color: #F06798;
+  }
+  

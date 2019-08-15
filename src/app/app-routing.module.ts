@@ -11,6 +11,7 @@ import { LogInComponent } from './log-in/log-in.component';
 import { AuthGuardService as AuthGuard} from './services/auth-guard.service';
 import { RoleGuardService as RoleGuard} from './services/role-guard.service';
 import { MyTicketComponent } from './tickets/my-ticket/my-ticket.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
  //{ path: '**', redirectTo:'/login', pathMatch: "full"} ,
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: 'ticketcreation', component: TicketCreationComponent, canActivate: [AuthGuard]},
   { path: 'showtickets', component: ShowTicketListComponent, canActivate: [RoleGuard]},
   { path: 'dashboard', component: TicketDashboardComponent, canActivate: [RoleGuard]},
-  { path: 'mytickets', component: MyTicketComponent, canActivate: [AuthGuard]}
+  { path: 'mytickets', component: MyTicketComponent, canActivate: [AuthGuard]},
+  {path: 'profile', component: ProfileComponent}
 ];
 
 @NgModule({

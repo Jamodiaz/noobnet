@@ -8,8 +8,7 @@ import { Iauth } from './auth';
   providedIn: 'root'
 })
 export class AuthService {
-
-
+  
   authenticated: Iauth;
 
   constructor(public jwtHelper: JwtHelperService, private log: LogInService) { }
@@ -20,12 +19,12 @@ export class AuthService {
     let role = localStorage.getItem('Role');
     let email = localStorage.getItem('AuthEmail');
 
-    this.authenticatedUser(role, email);
+    this.authenticatedUser(email);
 
     return !this.jwtHelper.isTokenExpired(token);
   }
 
-  async authenticatedUser(role, email) {
+  async authenticatedUser(email) {
     let authenticated: any = await this.log.getAuthenticated(email);
     this.authenticated = authenticated.Data;
   }

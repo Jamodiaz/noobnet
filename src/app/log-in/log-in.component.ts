@@ -4,6 +4,8 @@ import { AuthService } from '../services/auth.service';
 import { LogInService } from './log-in.service';
 import { Iusers } from '../users/users-and-technicians/users';
 import { Router } from '@angular/router';
+import { Iauth } from '../services/auth';
+import { UsersService } from '../users/users.service';
 
 
 @Component({
@@ -57,17 +59,36 @@ export class LogInComponent implements OnInit {
     }
     localStorage.setItem('AuthEmail', user.email);
     await this.log.login(user);
-    await this.auht.isAuthenticated();
+    await this.log.getRoleOfAuthenticated(user.email)
+    await this.auht.isAuthenticated();;
     let auth: any = await this.log.getAuthenticated(user.email);
-    await this.log.getRoleOfAuthenticated(user.email);
     if(this.auht.isAuthenticated()){
       this.router.navigate(['home']);
     }
   }
 
+  createNewUser(form: any) {
+    if (window.confirm("Did you enter the correct information")) {
+      this.promiseCreate(form).then((newUser: Iauth) => {
+     
+         this.log.createUserLogin(newUser)
+          //  this.str = "NotShow";
+      });
+    }
+  }
+  promiseCreate(user) : Promise<Iauth>{
+    let newUser: Iauth = {
+      Firstname: user.firstname,
+      Lastname: user.lastname,
+      Phone: user.phone,
+      Email: user.email,
+      Password: user.password
+    }
+    return Promise.resolve(newUser);
+  }
+
  logOut() {
     this.log.logout();
-    // this.router.navigate(['login'])
   }
  
   myStrCtr() {

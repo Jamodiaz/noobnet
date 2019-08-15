@@ -1,7 +1,7 @@
 export interface Iauth {
     User_id_pk?: number,
-    FirstName?: string,
-    LastName?: string,
+    Firstname?: string,
+    Lastname?: string,
     Email?: string,
     Phone?: string,
     Created_by?: number,

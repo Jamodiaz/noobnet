@@ -7,11 +7,12 @@ nav.navbar-color {
 .navbar-brand {
     color: white;
     font-weight: bold;
-    font-size: 3rem;
+    font-size: 2rem;
 }
 
 .nav-link {
     color: white;
+    font-size: 1.5rem;
 }
 
 .nav-item :hover {
@@ -19,7 +20,7 @@ nav.navbar-color {
 }
 
 i.titleIcon {
-    font-size: 4rem;
+    font-size: 3.5rem;
     padding-right: .5rem;
 }
 

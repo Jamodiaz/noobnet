@@ -52,12 +52,12 @@ export class CategoriesListComponent implements OnInit {
   ngOnInit() {
     this.promiseForTable(this.pageNum);
     this.formInit();
-    this.getCategories();
     this.getCategoriesCount();
     this.getActiveCatCount();
     this.getInactiveCatCount();
   }
 
+  // Init for the form
   formInit(): Promise<void> {
     this.keywordForm = this.formBuilder.group({
       keyword: [""]
@@ -77,11 +77,13 @@ export class CategoriesListComponent implements OnInit {
     this.promiseForTable(this.pageNum);
   }
 
+  // This method handles the search bar
   onSearchChange(event: string) {
     this.keyword = event;
     this.promiseForTable(this.pageNum);
   }
 
+  // This method gets all the data for the table
   async promiseForTable(event: any) {
     this.pageNum = event;
     if(this.tableControl === "Active") {
@@ -114,12 +116,12 @@ export class CategoriesListComponent implements OnInit {
     if(window.confirm("Do you really want to change the activE state of the category?")){
       this.promiseCategoryEditActiveState(category, event.checked).then(updatedCategory => {
         this.categoriesService.updateCategoryActiveState(updatedCategory).subscribe(res => {
-          this.getCategories();
-          this.getActiveCatCount();
+          this.promiseForTable(this.pageNum);
+          this.getActiveCatCount()
           this.getInactiveCatCount();
         });
       })
-    }else return;
+    }else return;;
   }
   promiseCategoryEditActiveState(category, event): Promise<Icategories> {
     let updatedCategory: Icategories = {
@@ -129,25 +131,21 @@ export class CategoriesListComponent implements OnInit {
     return Promise.resolve(updatedCategory);
   }
 
-  // This method gets all the categories 
-  getCategories() {
-    this.categoriesService.getCategoriesList().subscribe((categories: Icategories) => {
-      this.categories = categories['Data'];
-    });
-  }
-
+  // This methods gets all categories count
   getCategoriesCount() {
     this.homeService.getCategoriesCount().subscribe(res => {
       this.catCount = res['Data'];
     });
   }
 
+  // This method gets all the active categories count
   getActiveCatCount() {
     this.categoriesService.categoryActiveCount().subscribe((count: any) => {
       this.activeCatCount = count['Data'][0];
     });
   }
 
+  // This methods gets all the inactive categories count
   getInactiveCatCount() {
     this.categoriesService.categoryInactiveCount().subscribe((count: any) => {
       this.inactiveCatCount = count['Data'][0];

@@ -1,4 +1,4 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <app-log-in *ngIf="!loggedIn()"></app-log-in>
 <app-nav-bar *ngIf="loggedIn()"></app-nav-bar>
-<router-outlet></router-outlet>
+<router-outlet *ngIf="loggedIn()"></router-outlet>

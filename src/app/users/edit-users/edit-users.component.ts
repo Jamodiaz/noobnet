@@ -17,9 +17,13 @@ export class EditUsersComponent implements OnInit {
   submitted = false;
 
   idRole: number;
+  role: any;
+
+  firstName: string;
+  lastName: string;
 
   @Input() user: any;
-  @Input() roles: Iroles;
+  @Input() roles: any;
 
   @Output() formValue = new EventEmitter();
 
@@ -29,6 +33,7 @@ export class EditUsersComponent implements OnInit {
     private usersFormBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.role = localStorage.getItem('Role')
     this.formInit().then(result => {
       this.formSetData();
       console.log(this.roles)
@@ -79,12 +84,8 @@ export class EditUsersComponent implements OnInit {
 
 
   onSubmit(form: any) {
-    
-
+  
     this.submitted = true;
-
- 
-
     this.formValue.emit(form);
 
   }
