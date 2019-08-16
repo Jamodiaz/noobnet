@@ -10,6 +10,7 @@ import { MatSelectChange, Sort } from '@angular/material';
 import { Router } from '@angular/router';
 import { MyHomeService } from 'src/app/home/home/my-home.service';
 import { CategoriesService } from 'src/app/categories/categories.service';
+import { Inav } from 'src/app/common/navigate/navigate';
 
 @Component({
   selector: 'app-technician-assigments',
@@ -44,6 +45,22 @@ export class TechnicianAssigmentsComponent implements OnInit {
   id: number;
   cId: number;
 
+
+  nav: Inav[] = [
+    {
+      title: "Homa",
+      route: "/home"
+    },
+    {
+      title: "Categories",
+      route: "/categories"
+    },
+    {
+      title: "Users & Technicians",
+      route: "//usersandtechnicians"
+    }
+  ];
+
   // Angular Material table header
   displayedColumns: string[] = ['id_category_pk_fk','category_type',"actions"];
 
@@ -65,6 +82,7 @@ export class TechnicianAssigmentsComponent implements OnInit {
     this.promiseForTbl(this.pageNum);
   }
 
+  // This method is responsible for getting the assigned categories of the selected technician
   async promiseForTbl(event : any) {
     this.pageNum = +event;
     let asgned: any = await this.techAssignedService.getTechAssignments(this.pageNum, this.pSize, this.id);
@@ -85,24 +103,29 @@ export class TechnicianAssigmentsComponent implements OnInit {
     return Promise.resolve(this.id)
   }
 
+  // This method gets the technician count
   getTechCount() {
     this.homeService.getTechniciansCount().subscribe(res => {
       this.techCount = res['Data'];
     });
   }
 
+  // This method gets the categories count
   getCategoriesCount() {
     this.homeService.getCategoriesCount().subscribe(res => {
       this.catCount = res['Data'];
     });
   }
 
+  // This method gets the active categories count
   getActiveCatCount() {
     this.categoriesService.categoryActiveCount().subscribe((count: any) => {
       this.activeCatCount = count['Data'][0];
     });
   }
 
+  
+  // This method gets the inactive categories count
   getInactiveCatCount() {
     this.categoriesService.categoryInactiveCount().subscribe((count: any) => {
       this.inactiveCatCount = count['Data'][0];

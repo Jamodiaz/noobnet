@@ -27,6 +27,7 @@ import { AuthService } from './services/auth.service';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { MyTicketComponent } from './tickets/my-ticket/my-ticket.component';
 import { ProfileComponent } from './profile/profile.component';
+import { NavigateComponent } from './common/navigate/navigate.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { ProfileComponent } from './profile/profile.component';
     NavBarComponent,
     MyTicketComponent,
     ProfileComponent,
+    NavigateComponent
   ],
   imports: [
     BrowserModule,
@@ -57,8 +59,6 @@ import { ProfileComponent } from './profile/profile.component';
       config: {
         tokenGetter: function  tokenGetter() {
              return   localStorage.getItem('access_token');},
-        // whitelistedDomains: ['localhost:'],
-        // blacklistedRoutes: ['http://localhost:3000/auth/login']
       }
     })
   ],

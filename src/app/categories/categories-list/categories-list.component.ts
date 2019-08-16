@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { HomeComponent } from 'src/app/home/home/home.component';
 import { MyHomeService } from 'src/app/home/home/my-home.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Inav } from 'src/app/common/navigate/navigate';
 
 @Component({
   selector: 'app-categories-list',
@@ -19,7 +20,21 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class CategoriesListComponent implements OnInit {
 
+  nav: Inav[] = [
+    {
+      title: "Homa",
+      route: "/home"
+    },
+    {
+      title: "Technician Assignments",
+      route: "/technicianassigments"
+    },
+    {
+      title: "Users & Technicians",
+      route: "//usersandtechnicians"
+    }
 
+  ];
 
   // Controllers for data
   categories: Icategories[];
@@ -46,7 +61,7 @@ export class CategoriesListComponent implements OnInit {
 
   constructor(private categoriesService: CategoriesService,
     private modalService: ModalService,
-    private authService: AuthService, private homeService: MyHomeService, 
+    private authService: AuthService, private homeService: MyHomeService,
     private formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -66,7 +81,7 @@ export class CategoriesListComponent implements OnInit {
     return Promise.resolve();
   }
 
-  
+
   // Method that handles the angular material radio buttons 
   onChange(changed: MatRadioChange) {
     if (changed.value === "Active")
@@ -86,19 +101,19 @@ export class CategoriesListComponent implements OnInit {
   // This method gets all the data for the table
   async promiseForTable(event: any) {
     this.pageNum = event;
-    if(this.tableControl === "Active") {
-      let cat = await this.categoriesService.getCategoriesSearch(this.keyword,this.pageNum,this.pSize);
+    if (this.tableControl === "Active") {
+      let cat = await this.categoriesService.getCategoriesSearch(this.keyword, this.pageNum, this.pSize);
       this.allCategories = cat["Data"];
       let count = await this.categoriesService.getCategoriesSearchCount(this.keyword);
       this.allCategoriesCount = count['Data'];
     }
     else if (this.tableControl === "Inactive") {
-      let cat = await this.categoriesService.getCategoriesInactiveSearch(this.keyword,this.pageNum,this.pSize);
+      let cat = await this.categoriesService.getCategoriesInactiveSearch(this.keyword, this.pageNum, this.pSize);
       this.allCategories = cat["Data"];
       let count = await this.categoriesService.getCategoriesInactiveSearchCount(this.keyword);
       this.allCategoriesCount = count['Data'];
     }
-    
+
   }
 
   // This method saves the id of the selected category
@@ -113,7 +128,7 @@ export class CategoriesListComponent implements OnInit {
 
   // This method handles the mat-slide-toggle and marks as active and inactive in the databse
   onActiveSlide(event, category) {
-    if(window.confirm("Do you really want to change the activE state of the category?")){
+    if (window.confirm("Do you really want to change the activE state of the category?")) {
       this.promiseCategoryEditActiveState(category, event.checked).then(updatedCategory => {
         this.categoriesService.updateCategoryActiveState(updatedCategory).subscribe(res => {
           this.promiseForTable(this.pageNum);
@@ -121,7 +136,7 @@ export class CategoriesListComponent implements OnInit {
           this.getInactiveCatCount();
         });
       })
-    }else return;;
+    } else return;;
   }
   promiseCategoryEditActiveState(category, event): Promise<Icategories> {
     let updatedCategory: Icategories = {
@@ -205,7 +220,6 @@ export class CategoriesListComponent implements OnInit {
       this.categories = data;
       return;
     }
-
     this.categories = data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
@@ -214,7 +228,6 @@ export class CategoriesListComponent implements OnInit {
         default: return compare(a.active, b.active, isAsc);
       }
     });
-
   }
 }
 

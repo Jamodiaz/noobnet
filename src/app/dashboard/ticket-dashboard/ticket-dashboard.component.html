@@ -1,4 +1,48 @@
 <div class="background">
+
+  <div class=" row ticket-menu text-center">
+            <div class="dashboard-title">
+                <h1 style="padding-top: .5rem; text-align: center; font-family: helvetica; font-size: 3rem; color:  #D3D6E1"> Tickets </h1>
+              </div>
+              <div>
+                  <mat-radio-group (change)="onChange($event)" >
+                    <div class="row">
+                      <div class="col-3">
+                          <mat-radio-button class="radio-style" value="All">  All Tickets </mat-radio-button>
+                      </div>
+                      <div class="col-3">
+                          <mat-radio-button  class="radio-style" value="Tech"> Technician </mat-radio-button>
+                      </div>
+                      <div class="col-3">
+                          <mat-radio-button  class="radio-style" value="Cat">  Categories </mat-radio-button>
+                        </div>
+                        <div class="col-3">
+                            <mat-radio-button class="radio-style" value="Stat">  Status </mat-radio-button>
+                          </div>
+                    </div>
+                    </mat-radio-group>
+              </div>
+      
+      </div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="background">
   <!-- --------------------------->
   <div class="dashboard-menu">
     <div class="dashboard-title">
@@ -110,57 +154,56 @@
     </div>
   </div>
   <br>
-  <div class="container-fluid my-chart-container rounded">
-    <br>
-      <h1 class="header-dates"> Monthly Administrative Recap Report</h1>
-    <div class="row">
-        <div class="row container-fluid">
-          <div class="container-fluid">
-            <mat-form-field appearance="outline">
-              <mat-label>Select Year</mat-label>
-              <mat-select (selectionChange)="getCurrentYearSelected($event)" disableRipple>
-                <mat-option *ngFor="let y of createdYears" value="{{y}}">{{y}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div class="container">
-            <google-chart class="chart-align" *ngIf="myArrayMonthControler != null" #chart [title]="title" [type]="type"
-              [data]="data" [columnNames]="columnNames" [options]="options" [width]="width" [height]="height">
-            </google-chart>
-          </div>
-          <br>
-          <div class=" .d-flex my-c-report align-mycenter">
-            <h1 class="align-mycenter" style="font-size: 3rem; font-weight: bolder; padding-top: 1rem;">Administrative Counts</h1>
-            <div class="row">
-              
-                <h1 class="count-text"> Categories List Count</h1>
-                <h1 class="count-text material-icons" > assignment </h1>
-                <h1 class="count-num"> {{catCount}} </h1>
+  <div class=" container-fluid my-chart-container rounded">
+      <br>
+        <h1 class="header-dates"> Monthly Administrative Recap Report</h1>
+            <div class="container-fluid">
+              <mat-form-field appearance="outline">
+                <mat-label>Select Year</mat-label>
+                <mat-select (selectionChange)="getCurrentYearSelected($event)" disableRipple>
+                  <mat-option *ngFor="let y of createdYears" value="{{y}}">{{y}}</mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
+            <br>
             <div class="row">
-                <h1 class="count-text">Tickets List Count</h1>
-                <h1 class="count-text material-icons"> assignment </h1>
-                <h1 class="count-num">  {{ticketCount}} </h1>
-            </div>
-            <div class="row">
-                <h1 class="count-text">Roles List Count</h1>
-                <h1 class="count-text material-icons"> edit </h1>
-                <h1 class="count-num">   {{roleCount}} </h1>
-            </div>
-            <div class="row">
-                <h1 class="count-text">Technicians List Count</h1>
-                <h1 class="count-text material-icons"> assignment_ind</h1>
-                <h1 class="count-num">   {{techCount}} </h1>
-            </div>
-            <div class="row">
-                <h1 class="count-text">Clients List Count</h1>
-                <h1 class="count-text material-icons"> assignment_ind</h1>
-                <h1 class="count-num">  {{clientCount}} </h1>
-            </div>
-          </div>
-        </div>
+              <div style="max-width: 100%;"class="col-lg-6 col-md-12 col-sm-12">
+                      <google-chart *ngIf="myArrayMonthControler != null" #chart [title]="title" [type]="type"
+                        [data]="data" [columnNames]="columnNames" [options]="options" [width]="width" [height]="height">
+                      </google-chart>        
+              </div>
+              <div class="col-lg-6 col-md-12 col-sm-12">
+                  <div class="my-c-report">
+                      <h1 class="count-text text-center" >Administrative Counts</h1>
+                      <div class="row">
+                          <h1 class="col-6 count-text"> Categories Count</h1>
+                          <h1 class="col-3 count-text material-icons" > assignment </h1>
+                          <h1 class="col-3 count-num"> {{catCount}} </h1>
+                      </div>
+                      <div class="row">
+                          <h1 class="col-6 count-text">Tickets Count</h1>
+                          <h1 class="col-3 count-text material-icons"> assignment </h1>
+                          <h1 class="col-3 count-num">  {{ticketCount}} </h1>
+                      </div>
+                      <div class="row">
+                          <h1 class="col-6 count-text">Roles Count</h1>
+                          <h1 class="col-3 count-text material-icons"> edit </h1>
+                          <h1 class="col-3 count-num">   {{roleCount}} </h1>
+                      </div>
+                      <div class="row">
+                          <h1 class="col-6 count-text">Technicians Count</h1>
+                          <h1 class="col-3 count-text material-icons"> assignment_ind</h1>
+                          <h1 class=" col-3 count-num">   {{techCount}} </h1>
+                      </div>
+                      <div class="row">
+                          <h1 class=" col-6 count-text">Clients Count</h1>
+                          <h1 class=" col-3 count-text material-icons"> assignment_ind</h1>
+                          <h1 class="col-3 count-num">  {{clientCount}} </h1>
+                      </div>
+                    </div>
+              </div>
+            </div>   
     </div>
-  </div>
 <br>
 <!-- --------------------------->
 <br>

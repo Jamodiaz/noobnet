@@ -1,0 +1,17 @@
+<div style="margin-left: 1rem;" class="row">
+  <div class="col-6">
+      <mat-form-field class="my-select-panel-class" appearance="outline"  color="primary">
+          <mat-label></mat-label>
+          <mat-select (selectionChange)="selected($event)">
+            <mat-option *ngFor="let n of navigate" [value]="n.route">
+              {{n.title}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+  </div>
+  <div class="col-6">
+    <button (click)="onClick()" class="btn my-btn">
+      GO
+    </button>
+  </div>
+</div>

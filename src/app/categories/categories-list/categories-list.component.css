@@ -7,7 +7,6 @@ h1 {
 }
 
 .my-btn {
-    margin-right: 1rem;
     font-size: 2rem;
     border-radius: 12px;
     border: 2px solid #091D3C;
@@ -31,6 +30,23 @@ h1 {
     background-color: transparent;
     color: #091D3C;
 }
+
+.info-var {
+    padding: 1rem;
+    color: #091D3C;
+    background-color: #D3D6E1;
+    border-color: #091D3C;
+    border-style: solid;
+    border-width: 5px;
+    width: 100%;
+    height: 100%;
+ }
+ 
+ .card-text-style {
+    font-family: helvetica;
+    font-size: 3rem; 
+    color:#091D3C
+ }
 
 .action-btn:hover {
     margin-right: 1rem;
@@ -67,47 +83,46 @@ h1 {
     background-color: #D3D6E1;
 }
 
-.content-var {
-    border-color: #091D3C;
-    border-style: solid;
-    border-width: 5px;
-    width: 50%;
-    height: 12rem;
-    background-color: #D3D6E1;
-}
-
-.add-var {
-    margin-left: 1rem;
-    color: #091D3C;
-    background-color: #D3D6E1;
-    border-color: #091D3C;
-    border-style: solid;
-    border-width: 5px;
-    width: 20%;
-    height: 12rem;
-}
-
 .info-var {
-    margin-left: 1rem;
+    padding: 1rem;
     color: #091D3C;
     background-color: #D3D6E1;
     border-color: #091D3C;
     border-style: solid;
     border-width: 5px;
-    width: 13%;
-    height: 12rem;
+    width: 100%;
+    height: 100%;
 }
 
 .small-content {
-    width: 30%;
     margin-left: 1rem;
     color: #091D3C;
     background-color: #D3D6E1;
     border-color: #091D3C;
     border-style: solid;
     border-width: 5px;
-    height: 6rem;;
+    width: 40%;
+    padding: 1rem 1rem 1rem 2rem;
 }
+
+.radio-style {
+    margin-left: 5rem !important;
+    font-size: 3rem;
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+    opacity: 0.5 !important;     /*click effect color change*/
+    background-color: #091D3C !important;
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+    background-color: #475283 !important;   /*inner circle color change*/
+}
+
+::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+   border-color: #091D3C !important; /*outer ring color change*/
+}
+
 
 ::ng-deep .mat-focused .mat-form-field-label {
     color: #D3D6E1 !important;
@@ -125,8 +140,8 @@ h1 {
     color: #D3D6E1 !important;
   }
   
-  .matselect-placeholder::mat-select-placeholder { 
-    color: white;
+  ::ng-deep .matselect-placeholder::mat-select-placeholder { 
+    color: #D3D6E1;
     opacity: 1; 
    }
 
@@ -164,17 +179,4 @@ h1 {
 
 ::ng-deep.mat-list-item.active {
     color: #D3D6E1 !important;
-}
-
-::ng-deep .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
-    opacity: 0.5 !important;     /*click effect color change*/
-    background-color: #091D3C !important;
-}
-
-::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
-    background-color: #475283 !important;   /*inner circle color change*/
-}
-
-::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
-   border-color: #091D3C!important; /*outer ring color change*/
 }
