@@ -27,6 +27,7 @@ h3 {
     display: flex;
     flex-direction: column;
     border: 5px solid #091D3C;
+    box-shadow: 5px 10px rgba(9, 29, 60, 0.726);
 }
 
 p {
