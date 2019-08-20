@@ -292,6 +292,7 @@ export class ShowTicketListComponent implements OnInit {
     this.promiseAddComments(form).then(newTicket => {
       this.ticketService.addTechnicianComments(newTicket).subscribe(res => {
         this.getTickets();
+        this.promiseForTable(this.pageNum);
         this.modalService.closeModal();
       })
     })
@@ -311,6 +312,7 @@ export class ShowTicketListComponent implements OnInit {
     this.promiseTicketUpdate(form).then(newTicket => {
       this.ticketService.updateTicket(newTicket).subscribe(result => {
         this.getTickets();
+        this.promiseForTable(this.pageNum);
         this.modalService.closeModal();
       });
     });

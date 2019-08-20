@@ -70,7 +70,6 @@ export class LogInComponent implements OnInit {
   createNewUser(form: any) {
     if (window.confirm("Did you enter the correct information")) {
       this.promiseCreate(form).then((newUser: Iauth) => {
-     
          this.log.createUserLogin(newUser)
           //  this.str = "NotShow";
       });

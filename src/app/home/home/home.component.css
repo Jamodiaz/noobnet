@@ -20,7 +20,8 @@ h3 {
     margin-top: 3rem;
     padding-top: 3rem;
     font-family: helvetica;
-    height: 50rem;
+    width: 100%;
+    height: 100%;
     background-color: #D3D6E1;
     color: #091D3C;
     display: flex;
@@ -37,6 +38,7 @@ div.customCard {
     box-shadow: none;
     background-color: transparent;
     border: 5px solid #091D3C;
+    width: 100%;
 }
 
 div.customCard2 {
@@ -45,6 +47,7 @@ div.customCard2 {
     background-color: #D3D6E1;
     border: 6px solid #091D3C;
 }
+
 
 h5 {
     color: #091D3C;

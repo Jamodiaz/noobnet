@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MyHomeService } from './my-home.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-home',
@@ -26,30 +25,35 @@ export class HomeComponent implements OnInit {
     this.getRoleCount();
   }
 
+  // Getter for the technician count 
   getTechCount() {
     this.homeService.getTechniciansCount().subscribe(res => {
       this.techCount = res['Data'];
     });
   }
 
+  // Getter for the client count
   getClientCount() {
     this.homeService.getClientCount().subscribe(res => {
       this.clientCount = res['Data'];
     });
   }
 
+  // Getter for the categories count 
   getCategoriesCount() {
     this.homeService.getCategoriesCount().subscribe(res => {
       this.catCount = res['Data'];
     });
   }
 
+  // Getter for the roles count
   getRoleCount() {
     this.homeService.getRoleCount().subscribe(res => {
       this.roleCount = res['Data'];
     });
   }
 
+  // Getter for the ticket count
   getTicketCount() {
     this.homeService.getTicketCount().subscribe(res => {
       this.ticketCount = res['Data'];

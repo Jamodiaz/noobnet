@@ -142,23 +142,24 @@ export class TicketDashboardComponent implements OnInit {
     this.currentDate().then(res => {
       this.promiseForChart().then(res => {
         this.promiseTable(this.pageNum);
-       
       });
     })
   }
 
+  // Initialization of the form
   formInit(): Promise<void> {
-
     this.keywordForm = this.formBuilder.group({
       keyword: [""]
     });
-
     return Promise.resolve();
   }
 
+  // This method is used to assign the data for the chart
   assignData(arr: number[], count: number[]): Promise<any> {
 
+    // This is an array repesenting the months in a year
     this.myArrayMonthControler = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
 
     for (let i = 0; i < 12; i++) {
       if (arr[i] === 1)
@@ -261,14 +262,15 @@ export class TicketDashboardComponent implements OnInit {
         default: return compare(a.active, b.active, isAsc);
       }
     });
-
   }
 
+  // This method handles the search bar 
   onSearchChange(event: string) {
     this.keyword = event;
     this.promiseTable(this.pageNum);
   }
 
+  // This method gets the current year in order to show information in the chart
   async currentDate() {
     let res: any = await this.dashboardService.getCurrentYear();
     this.currentYear = res['Data'];
@@ -276,6 +278,8 @@ export class TicketDashboardComponent implements OnInit {
     return Promise.resolve(this.year);
   }
 
+  // This method handles getting thee information to show in the table
+  // It handles getting tickets by Category, by technician and by status
   async promiseTable(event: any) {
     this.pageNum = event;
     let tickets: any;
@@ -287,10 +291,10 @@ export class TicketDashboardComponent implements OnInit {
       this.universalCount = count['Data'];
     }
     else if (this.tableControl === "Tech") {
-       tickets = await this.dashboardService.getTechnicianSearch(this.keyword, this.pageNum, this.pSize, this.idTc);
-       this.allTickets = tickets['Data'];
-       count = await this.dashboardService.getTechnicianSearchCount(this.keyword, this.idTc);
-       this.universalCount = count['Data'];
+      tickets = await this.dashboardService.getTechnicianSearch(this.keyword, this.pageNum, this.pSize, this.idTc);
+      this.allTickets = tickets['Data'];
+      count = await this.dashboardService.getTechnicianSearchCount(this.keyword, this.idTc);
+      this.universalCount = count['Data'];
     }
     else if (this.tableControl === "Cat") {
       tickets = await this.dashboardService.getCategorySearch(this.keyword, this.pageNum, this.pSize, this.idCt);
@@ -304,9 +308,10 @@ export class TicketDashboardComponent implements OnInit {
       count = await this.dashboardService.getStatusSearchCount(this.keyword, this.idSt);
       this.universalCount = count['Data'];
     }
-
   }
 
+  // This method handles getting all the data for the chart including months that tickets where created
+  // and the amount of tickets created in that month
   async promiseForChart() {
     let years: any = await this.dashboardService.getTicketCreatedYears();
     this.createdYears = years['Data'];
@@ -324,6 +329,7 @@ export class TicketDashboardComponent implements OnInit {
     });
   }
 
+  // Getter for status list
   getStatusList() {
     this.ticketService.getStatus().subscribe((status: Istatus) => {
       this.status = status['Data'];
@@ -335,45 +341,52 @@ export class TicketDashboardComponent implements OnInit {
   getTechnicians() {
     this.userService.getTechnicians().subscribe((technicians: Itechnicians) => {
       this.technicians = technicians['Data'];
-      this.defaultTech = this.idTc =this.technicians[1].user_id_pk;
+      this.defaultTech = this.idTc = this.technicians[1].user_id_pk;
     })
   }
 
+  // Handles saving the current year seleccted 
   getCurrentYearSelected(change: MatSelectChange) {
     this.year = change.value;
     this.promiseForChart();
   }
 
+  // Getter for the technician list count
   getTechCount() {
     this.homeService.getTechniciansCount().subscribe(res => {
       this.techCount = res['Data'];
     });
   }
 
+  // Getter for the client list count
   getClientCount() {
     this.homeService.getClientCount().subscribe(res => {
       this.clientCount = res['Data'];
     });
   }
 
+  // Getter for the categories list count 
   getCategoriesCount() {
     this.homeService.getCategoriesCount().subscribe(res => {
       this.catCount = res['Data'];
     });
   }
 
+  // Getter for the roles list count
   getRoleCount() {
     this.homeService.getRoleCount().subscribe(res => {
       this.roleCount = res['Data'];
     });
   }
 
+  // Getter for the ticket list count 
   getTicketCount() {
     this.homeService.getTicketCount().subscribe(res => {
       this.ticketCount = res['Data'];
     });
   }
 
+  // Getter for the technician id with most closed ticket
   getTechnicianMaxClosed() {
     this.ticketService.getTechnicianMaxClosedTickets().subscribe((id: any) => {
       this.technicianMaxClosedId = id['Data'];
@@ -381,6 +394,7 @@ export class TicketDashboardComponent implements OnInit {
     });
   }
 
+  // Getter for the technician id with most opened ticket
   getTechnicianMaxOpened() {
     this.ticketService.getTechnicianMaxOpenedTickets().subscribe((id: any) => {
       this.technicianMaxOpenedId = id['Data'];
@@ -388,30 +402,35 @@ export class TicketDashboardComponent implements OnInit {
     })
   }
 
+  // Getter for the technician with most closed ticket
   getTechnicianMaxClosedData(id: number) {
     this.selectByIdService.getUserById(id).subscribe((technician: Itechnicians) => {
       this.technicianMaxClosed = technician['Data'][0];
     });
   }
 
+  // Getter for the technician with most opened ticket
   getTechnicianMaxOpenedData(id: number) {
     this.selectByIdService.getUserById(id).subscribe((technician: Itechnicians) => {
       this.technicianMaxOpened = technician['Data'][0];
     });
   }
 
+  // Gets the count of the max closed tickets
   getMaxOpenedCount() {
     this.ticketService.getMaxOpenedTicketCount().subscribe((count: any) => {
       this.technicianMaxOpenedCount = count['Data'][0];
     });
   }
 
+  // Gets the count of the max closed tickets 
   getMaxClosedCount() {
     this.ticketService.getMaxClosedTicketCount().subscribe((count: any) => {
       this.technicianMaxClosedCount = count['Data'][0];
     });
   }
 
+  // Gets the category most applied for tickets
   getCategoryMostTickets() {
     this.ticketService.getCategoryMostTickets().subscribe((id: any) => {
       this.categoryMostTicketsId = id['Data'];
@@ -419,44 +438,48 @@ export class TicketDashboardComponent implements OnInit {
     });
   }
 
+  // Getter for the category id 
   getCategory(id: number) {
     this.selectByIdService.getCategoryById(id).subscribe((cat: Icategories) => {
       this.categoryMostTickets = cat['Data'][0];
     });
   }
 
+  // Getter for the count tickets of the category most applied for
   getCategoryMostCount() {
     this.ticketService.getCountCategoryMostTickets().subscribe((count: number) => {
       this.categoriesMostTicketCount = count['Data'];
     });
   }
 
+  // Getter for all the open tickets count
   getOpenedTicketCount() {
     this.ticketService.getOpenedTicketsCount().subscribe((count: any) => {
       this.openedTicketsCount = count['Data'];
     });
   }
 
+  // Getter for all the closed tickets count
   getClosedTicketsCount() {
     this.ticketService.getClosedTicketsCount().subscribe((count: any) => {
       this.closedTicketsCount = count['Data'];
     });
   }
 
+  // Getter for active categories count
   getActiveCatCount() {
     this.categoriesService.categoryActiveCount().subscribe((count: any) => {
       this.activeCatCount = count['Data'][0];
     });
   }
 
+  // Getter for inactive categories count
   getInactiveCatCount() {
     this.categoriesService.categoryInactiveCount().subscribe((count: any) => {
       this.inactiveCount = count['Data'][0];
     });
   }
-
 }
-
 
 // This method is used for comparing categories in the table 
 function compare(a, b, isAsc) {
